@@ -1,7 +1,5 @@
 #!/bin/awk
 
-# TODO Fix cases like the printing of "of the" on a separate line.
-
 # The "n" and "max" variables are specified as parameters only for making them local.
 function get_longest_element_length( array, n, max )
 {
@@ -30,17 +28,21 @@ function get_longest_element_length( array, n, max )
             print
             next
         }
+        # The code below handles all the articles, among others.
+        n = 1
         for( k = 2 ; k <= length( words ) ; ++k )
         {
-            # The condition includes all the articles.
-            if( length( words[ k - 1 ] ) <= 3 )
+            if( length( words[ k - 1 ] ) > 3 )
             {
-                words[ k - 1 ] = words[ k - 1 ] " " words[ k ]
-                words[ k ] = ""
-                ++k
+                for( m = n + 1 ; m < k ; ++m )
+                {
+                    words[ n ] = words[ n ] " " words[ m ]
+                    words[ m ] = ""
+                }
+                n = k
             }
         }
-        # For cases like "A good place to work in"
+        # For cases like "A good place to work in", where the last word is too short to be on a separate line.
         if( length( words[ length( words ) ] ) >= 1 && length( words[ length( words ) ] ) <= 3 )
         {
             n = length( words ) - 1
