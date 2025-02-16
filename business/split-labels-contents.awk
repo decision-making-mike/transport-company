@@ -2,16 +2,15 @@
 
 # TODO Fix cases like the printing of "of the" on a separate line.
 
-function get_longest_element_length( array, n )
+# The "n" and "max" variables are specified as parameters only for making them local.
+function get_longest_element_length( array, n, max )
 {
     max = 0
-    max_index = -1
     for( n = 1 ; n <= length( array ) ; ++n )
     {
         if( max < length( array[ n ] ) )
         {
             max = length( array[ n ] )
-            max_index = n
         }
     }
     return max
@@ -24,8 +23,8 @@ function get_longest_element_length( array, n )
     else
     {
         split( $0, line_parts, "\"" )
-        label_text = line_parts[ 2 ]
-        split( label_text, words, " " )
+        label_content = line_parts[ 2 ]
+        split( label_content, words, " " )
         if( length( words ) == 1 )
         {
             print
