@@ -1,0 +1,5 @@
+https://www.researchgate.net/publication/297675657_Accounting_Database_Design_and_SQL_Implementation
+https://www.codeproject.com/Articles/5161230/Database-for-Financial-Accounting-Application-I-Ba
+https://stackoverflow.com/questions/596706/best-practices-for-storing-bank-information-in-a-database
+https://stackoverflow.com/questions/3957491/whats-the-best-db-to-store-banking-transactions
+https://dba.stackexchange.com/questions/294456/should-stored-financial-transactions-include-some-data-redundancy
