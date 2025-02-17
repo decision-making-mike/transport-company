@@ -30,16 +30,16 @@ function get_longest_element_length( array, n, max )
         }
         # The code below handles all the articles, among others.
         n = 1
-        for( k = 2 ; k <= length( words ) ; ++ k )
+        for( k = 1 ; k <= length( words ) ; ++ k )
         {
-            if( length( words[ k - 1 ] ) > 3 )
+            if( length( words[ k ] ) > 3 )
             {
-                for( m = n + 1 ; m < k ; ++ m )
+                for( m = n + 1 ; m <= k ; ++ m )
                 {
                     words[ n ] = words[ n ] " " words[ m ]
                     words[ m ] = ""
                 }
-                n = k
+                n = k + 1
             }
         }
         # For cases like "A good place to work in", where the last word is too short to be on a separate line.
