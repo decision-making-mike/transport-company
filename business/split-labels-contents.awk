@@ -4,7 +4,7 @@
 function get_longest_element_length( array, n, max )
 {
     max = 0
-    for( n = 1 ; n <= length( array ) ; ++n )
+    for( n = 1 ; n <= length( array ) ; ++ n )
     {
         if( max < length( array[ n ] ) )
         {
@@ -30,11 +30,11 @@ function get_longest_element_length( array, n, max )
         }
         # The code below handles all the articles, among others.
         n = 1
-        for( k = 2 ; k <= length( words ) ; ++k )
+        for( k = 2 ; k <= length( words ) ; ++ k )
         {
             if( length( words[ k - 1 ] ) > 3 )
             {
-                for( m = n + 1 ; m < k ; ++m )
+                for( m = n + 1 ; m < k ; ++ m )
                 {
                     words[ n ] = words[ n ] " " words[ m ]
                     words[ m ] = ""
@@ -59,7 +59,7 @@ function get_longest_element_length( array, n, max )
         {
             if( words[ k ] == "" || words[ k - 1 ] == "" )
             {
-                ++k
+                ++ k
                 continue
             }
             longest_length = get_longest_element_length( words )
@@ -70,19 +70,19 @@ function get_longest_element_length( array, n, max )
                 k = 2
                 continue
             }
-            ++k
+            ++ k
         }
         n = 1
-        for( k = 1 ; k <= length( words ) ; ++k )
+        for( k = 1 ; k <= length( words ) ; ++ k )
         {
             if( words[ k ] != "" )
             {
                 words1[ n ] = words[ k ]
-                ++n
+                ++ n
             }
         }
         printf( line_parts[ 1 ] "\"" )
-        for( k = 1 ; k <= length( words1 ) ; ++k )
+        for( k = 1 ; k <= length( words1 ) ; ++ k )
         {
             printf( words1[ k ] )
             if( k < length( words1 ) )
