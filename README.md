@@ -8,6 +8,10 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 2. Update of the goals of the company.
+
+I've updated the goals of the company. First, I've added information about hiring employees. Then, I've restructured and updated goals related to storing shipments and deliveries. Here, notably, I've introduced the notion of the route of a parcel. Before the introduction only vehicles could have routes. Lastly, I've removed the notion of addresses, and clarified the formulation of some goals.
+
 # Update 1
 
 This is my first update in this "transport company" project. The project is a spin-off of my "SQL and PostgreSQL learning" project (also available on GitHub at https://github.com/decision-making-mike/sql-postgresql-learning). You can find more details about the spin-off itself there, in update 50.

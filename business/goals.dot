@@ -98,6 +98,11 @@ digraph {
         // [label="responsibility=human resources department"]
     salaries_fixing -> salaries_storage
 
+    employee_hiring
+        [label="To hire employees"]
+        // [label="responsibility=human resources department"]
+    employee_hiring -> salaries_fixing
+
     expenses_reduction
         [label="To reduce its expenses"]
         // [label="responsibility=finance department"]
@@ -131,15 +136,19 @@ digraph {
             [label="To store the service price"]
             // [label="responsibility=it department"]
 
-        delivery_addresses_storage
-            [label="To store delivery addresses"]
+        delivery_information_storage
+            [label="To store the information that a delivery was done"]
             // [label="responsibility=it department"]
 
-        shipment_addresses_storage
-            [label="To store shipment addresses"]
+        shipment_delivery_relation_storage
+            [label="To store the information what shipment is related to a delivery"]
             // [label="responsibility=it department"]
 
-        routes_storage
+        shipment_information_storage
+            [label="To store the information that a shipment was done"]
+            // [label="responsibility=it department"]
+
+        vehicles_routes_storage
             [label="To store the routes of its vehicles"]
             // [label="responsibility=it department"]
 
@@ -154,20 +163,39 @@ digraph {
         salaries_storage
             [label="To store the salaries"]
             // [label="responsibility=it department"]
+
+        parcels_routes_storage
+            [label="To store the routes of parcels"]
+            // [label="responsibility=it department"]
+
+        shipment_vehicle_storage
+            [label="To store the information what vehicle a shipment was done with"]
+            // [label="responsibility=it department"]
+
+        parcel_shipments_storage
+            [label="To store the information what shipments a parcel has taken part in"]
     }
 
     remaining_money_to_pay_for_the_service_payments_storage -> clients_payments_storage
     service_advance_payments_storage -> clients_payments_storage
+    parcel_shipments_storage -> parcels_routes_storage
+    shipments -> parcel_shipments_storage
     clients_payments_storage -> particular_clients_payments_knowledge
     refueling_payments_storage -> particular_expenses_storage
+    delivery_information_storage -> parcels_routes_storage
+    delivery_information_storage -> vehicles_routes_storage
+    shipment_delivery_relation_storage -> parcels_routes_storage
+    shipment_delivery_relation_storage -> vehicles_routes_storage
+    parcels_routes_storage -> particular_parcels_routes_knowledge
     particular_expenses_storage -> particular_expenses_knowledge
     service_price_storage -> service_price_knowledge
-    delivery_addresses_storage -> routes_storage
-    shipment_addresses_storage -> routes_storage
-    routes_storage -> particular_routes_knowledge
+    vehicles_routes_storage -> vehicles_particular_routes_knowledge
     service_ratings_storage -> particular_service_ratings_knowledge
     employee_ratings_storage -> particular_employee_ratings_knowledge
     salaries_storage -> particular_salaries_knowledge
+    shipment_information_storage -> vehicles_routes_storage
+    shipment_vehicle_storage -> vehicles_routes_storage
+    shipment_information_storage -> parcels_routes_storage
 
     service_price_knowledge
         [label="To know the service price"]
@@ -193,44 +221,49 @@ digraph {
         [label="To ship loads"]
         // [label="responsibility=transportation department"]
     shipments -> deliveries
-    shipments -> shipment_addresses_storage
+    shipments -> shipment_information_storage
+    shipments -> shipment_vehicle_storage
 
     deliveries
         [label="To deliver loads"]
         // [label="responsibility=transportation department"]
     deliveries -> remaining_money_to_pay_for_the_service_payments_determination
-    deliveries -> delivery_addresses_storage
+    deliveries -> delivery_information_storage
+    deliveries -> shipment_delivery_relation_storage
 
     fuel_consumption_reduction
         [label="To reduce fuel consumption"]
         // [label="responsibility=transportation department"]
     fuel_consumption_reduction -> expenses_reduction
 
-    particular_deliveries_times_knowledge
-        [label="To know the times of its particular deliveries"]
+    particular_parcels_routes_times_knowledge
+        [label="To know the times of particular routes of parcels"]
         // [label="responsibility=transportation department"]
-    particular_deliveries_times_knowledge -> average_delivery_time_knowledge
+    particular_parcels_routes_times_knowledge -> average_parcel_route_time_knowledge
 
-    average_delivery_time_knowledge
-        [label="To know the average time of its deliveries"]
+    average_parcel_route_time_knowledge
+        [label="To know the average time of the routes of parcels"]
         // [label="responsibility=transportation department"]
-    average_delivery_time_knowledge -> average_delivery_time_reduction
+    average_parcel_route_time_knowledge -> average_parcel_route_time_reduction
 
-    average_delivery_time_reduction
-        [label="To reduce the average time of its deliveries"]
+    average_parcel_route_time_reduction
+        [label="To reduce the average time of the routes of parcels"]
         // [label="responsibility=transportation department"]
-    average_delivery_time_reduction -> professional_service_delivery
+    average_parcel_route_time_reduction -> professional_service_delivery
 
-    routes_optimization
+    vehicles_particular_routes_optimization
         [label="To optimize particular routes of its vehicles"]
         // [label="responsibility=transportation department"]
-    routes_optimization -> fuel_consumption_reduction
+    vehicles_particular_routes_optimization -> fuel_consumption_reduction
 
-    particular_routes_knowledge
+    vehicles_particular_routes_knowledge
         [label="To know particular routes of its vehicles"]
         // [label="responsibility=transportation department"]
-    particular_routes_knowledge -> particular_deliveries_times_knowledge
-    particular_routes_knowledge -> routes_optimization
+    vehicles_particular_routes_knowledge -> vehicles_particular_routes_optimization
+
+    particular_parcels_routes_knowledge
+        [label="To know particular routes of parcels"]
+    particular_parcels_routes_knowledge -> particular_parcels_routes_times_knowledge
 
     employees_surveying
         [label="To survey employees"]
