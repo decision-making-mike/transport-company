@@ -8,13 +8,13 @@
 
 [completed-reads.txt](completed-reads.txt)
 
-## Update 4. The `reset-database.bash` script.
+## Update 4. The `database/reset-database.bash` script.
 
-In this update I'm starting to publish files related to the database. The file with the `reset-database.bash` will be the first.
+In this update I'm starting to publish files related to the database. The file `database/reset-database.bash` will be the first.
 
-This file I've created back when this project still was a subproject. You can see the previous version at https://github.com/decision-making-mike/sql-postgresql-learning/blob/main/archive/transport-company/database/reset-database.sh. I'm going to discuss all the changes one by one.
+This script I've created back when this project still was a subproject. You can see the previous version at https://github.com/decision-making-mike/sql-postgresql-learning/blob/main/archive/transport-company/database/reset-database.sh. I'm going to discuss all the changes one by one.
 
-One, I've changed the extension of the script file from `sh` to `bash`. This is consistent with the practice I introduced in update 1.
+One, I've changed the extension of the file from `sh` to `bash`. This is consistent with the practice I introduced in update 1.
 
 Two, I've changed the `#!/usr/bin/bash` shebang to `#!/bin/bash`. First, I don't know if there is any difference between them from the point of view of an average Linux distribution. Here I mean only a theoretical difference as I don't assume the script to be run by anyone other than me. Also, I don't make my GitHub scripts executable, so, at least I guess so, there is no need for the shebang anyway if I'm about to run the script.
 
