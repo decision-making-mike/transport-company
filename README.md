@@ -8,6 +8,49 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 4. The `reset-database.bash` script.
+
+In this update I'm starting to publish files related to the database. The file with the `reset-database.bash` will be the first.
+
+This file I've created back when this project still was a subproject. You can see the previous version at https://github.com/decision-making-mike/sql-postgresql-learning/blob/main/archive/transport-company/database/reset-database.sh. I'm going to discuss all the changes one by one.
+
+One, I've changed the extension of the script file from `sh` to `bash`. This is consistent with the practice I introduced in update 1.
+
+Two, I've changed the `#!/usr/bin/bash` shebang to `#!/bin/bash`. First, I don't know if there is any difference between them from the point of view of an average Linux distribution. Here I mean only a theoretical difference as I don't assume the script to be run by anyone other than me. Also, I don't make my GitHub scripts executable, so, at least I guess so, there is no need for the shebang anyway if I'm about to run the script.
+
+Second, there is a difference between them from my point of view. `/bin/bash` is shorter and more ituitive for me, thus easier to conceptualize, remember and type. As a side note, this difference has led me to plan to use this shorter shebang in all the scripts in my GitHub projects from now on (at least to the extent I'm going to remember this decision in case of any future GitHub projects). If anyone has any insights on which shebang could I prefer to use, please make an issue, I'd be glad to know.
+
+Three, I've put single quotes (`'`) around more strings, the main ones being the file names `create-tables.sql` and `insert-data.sql`. Now the script is consistent with my belief that it is a good practice to use single quotes in Bash wherever it doesn't do any harm to the code. For instance, theoretically one could place command names inside single quotes, but I am not sure if this wouldn't harm readability of the code. I am open to consideration here.
+
+Four, I've lowercased all the variable names. In that I am consistent with my current practice of making lowercase the names of all the variables I create (but I don't exclude a possibility that there is a language out there not allowing creation of lowercase variable names). As the main benefit of the practice I find no need to decide on a script-by-script basis. This saves energy both for the lack of decision, and for not keeping in mind why I have made some names lowercase, and some uppercase.
+
+Five, in case of the `echo` commands, I've moved the redirections `1>&2` right after the names of the commands. I think the redirections are now more evident. But I am open to consideration where they should go in a command in the general case.
+
+Six, I'm now checking for the error of the last command in the same pipeline. That is, instead of using `$?`, and doing
+
+```bash
+<some command>
+
+if [[ $? != 0 ]]
+then
+    echo "Database creation error" 1>&2
+    exit 1
+fi
+```
+
+as it was before, now I use `||`, and do
+
+```bash
+<some command> || {
+    echo 1>&2 "Error when dropping or creating the database, exiting"
+    exit 1
+}
+```
+
+effectively having gotten rid of using the `$?` variable in the script. I now think this was unnecessary. But as reverting the change could be only done manually now, that is, with no help of Git, I'm not going to change it.
+
+Seven, I've introduced the `time` command. This command will let us compare the times of data preparation (and incidentally of insertion, since they are to be bundled). I guess the time of data preparation is worth to keep an eye on for three complementing reasons. First, I assume `reset-database.bash` to run as quick as not to dishearten the person that has run it, given a machine performing similarly to mine. Second, I plan that the script load all the data I plan for the database to hold. Third, I aim for 1 million rows at least in some of the tables. I say "at least in some" because the number of rows in some tables might depend on other tables. I haven't analyzed it yet. Lastly, worth to mention that in case the times won't be satisfying, I don't plan to do any aggresive optimization. This would use my energy for things I don't feel I need. I'd rather lower either the bar of performance, or of numbers of rows, and keep the whole project move on.
+
 ## Update 3. Graph visualization update.
 
 Firstly, I've moved the `visualize-graphs.bash` and its corresponding `split-labels-contents.awk` scripts from the `business` directory to the main directory of the repository. The reason was to have their location reflect that now they are to visualize DOT graphs in the whole repository instead of only in the `business` directory. Although currently any DOT graphs are only in the `business` directory, I plan to have more of them elsewhere, too.
