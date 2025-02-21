@@ -8,6 +8,14 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 3. Graph visualization update.
+
+Firstly, I've moved the `visualize-graphs.bash` and its corresponding `split-labels-contents.awk` scripts from the `business` directory to the main directory of the repository. The reason was to have their location reflect that now they are to visualize DOT graphs in the whole repository instead of only in the `business` directory. Although currently any DOT graphs are only in the `business` directory, I plan to have more of them elsewhere, too.
+
+Secondly, in the `visualize-graphs.bash` script, I've removed the "main" `sed` command and the corresponding `sed_commands` variable. The reason was there was no DOT graph with labels that the commands could be use on. Also, the script is now simpler. However, I haven't removed the comments within the `business/goals.dot` file that are relevant to the `sed` commands, that is, `// [label="responsibility=top management"]`, and the like. I still believe that the information about "responsibilities" that they contain may have its uses in the future, when the graph will grow.
+
+Thirdly, also in the `visualize-graphs.bash` script, I've removed the command `eog --fullscreen ./` and added a pipeline utilizing `find`, `grep`, `xargs` and `eog`. The reason was to allow displaying the generated images in the whole repository, that is, recursively, instead of just in the main directory of it. One may note I use the `--print0`, `--null-data`, and `--null` options. The reason is that the pipeline run in more cases without errors related to unusual file names than it would without those options.
+
 ## Update 2. Update of the goals of the company.
 
 I've updated the goals of the company. First, I've added information about hiring employees. Then, I've restructured and updated goals related to storing shipments and deliveries. Here, notably, I've introduced the notion of the route of a parcel. Before the introduction only vehicles could have routes. Lastly, I've removed the notion of addresses, and clarified the formulation of some goals.
