@@ -8,6 +8,14 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 5. The entity-relationship model of the company.
+
+In this update I'm publishing the entity-relationship model of the company. On a side note, I now think that it should have been published before the `database/reset-database.bash` script. This model doesn't expect the database to exist, while the `database/reset-database.bash` script is a helper script for creating the database.
+
+[The article about "entity-relationship model" on Wikipedia](https://en.m.wikipedia.org/wiki/Entity%E2%80%93relationship_model) lists 3 levels of such models, namely conceptual, logical and physical. I'm not familiar with data modeling, and this model is simple, so I've decided to not categorize it anyhow, and just name it an "entity-relationship model". If I had to categorize, I'd say it's a logical ER model that doesn't want to abandon the simplicity of a conceptual ER model. Should I need to create additional ER models in the future, I shall distinguish them by their names from this one. I don't know if I will change then the name of this model, though.
+
+The model is a simplified version of the model that was represented by the `create table` statements I've published back when this project still was a subproject. You can review them at https://github.com/decision-making-mike/sql-postgresql-learning/blob/main/archive/transport-company/database/create-tables.sql. Only as soon as the need arises, I'm going to make it more sophisticated. By the by, I like how simple it currently looks.
+
 ## Update 4. The `database/reset-database.bash` script.
 
 In this update I'm starting to publish files related to the database. The file `database/reset-database.bash` will be the first.

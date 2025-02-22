@@ -1,0 +1,38 @@
+digraph
+{
+    label = "An entity-relationship model\nof the company."
+
+    node
+        [ shape = "record" ]
+    edge
+        [ arrowhead = "none" ]
+
+    orders
+        [ label = "{ORDERS|ID\lTotal cargo weight in kg\l}" ]
+
+    vehicles
+        [ label = "{VEHICLES|ID\l}" ]
+
+    made_payments
+        [ label = "{MADE PAYMENTS|ID\lAmount\l}" ]
+
+    deliveries
+        [ label = "{DELIVERIES|ID\lShipment ID\l}" ]
+    deliveries -> shipments
+        [ taillabel = "0 or 1" ]
+
+    shipments
+        [ label = "{SHIPMENTS|ID\lVehicle ID\lParcel ID\l}" ]
+    shipments -> vehicles
+        [ headlabel = "1" ]
+    parcels -> shipments
+        [ headlabel = "0 or more" ]
+
+    parcels
+        [ label = "{PARCELS|ID\lOrder ID\l}" ]
+    orders -> parcels
+        [ headlabel = "1 or more" ]
+
+    parameters
+        [ label = "{PARAMETERS|ID\lName\lValue\l}" ]
+}
