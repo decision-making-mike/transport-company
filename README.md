@@ -8,6 +8,12 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 6. The scripts `database/create-tables.sql` and `database/insert-data.sql`.
+
+In this update I'm publishing the scripts `database/create-tables.sql` and `database/insert-data.sql`. They are simplified versions of the scripts with the same names that I have created back when this project still was a subproject.
+
+The script `database/insert-data.sql` is worth a word. Currently, on my machine, it generates and inserts 10 thousand rows into a 1-column table in about 0.55 s. For 100 thousand rows the time grows to 4 s, and for the desired 1 million rows to 40 s. Given I expect to perform the generation and insertion multiple times during debugging, I have fallen back to 10 thousand rows for now. My conclusion is, these times are not acceptable, especially given there will be more tables than this one to prepare and insert data into. I'm going to look for optimization.
+
 ## Update 5. The entity-relationship model of the company.
 
 In this update I'm publishing the entity-relationship model of the company. On a side note, I now think that it should have been published before the `database/reset-database.bash` script. This model doesn't expect the database to exist, while the `database/reset-database.bash` script is a helper script for creating the database.
