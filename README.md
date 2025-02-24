@@ -8,6 +8,10 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 8. Parameters.
+
+In this update I'm updating the script `database/create-tables.sql` with the creation of the table `parameters`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table (should it be "the showing", not "showing"?).
+
 ## Update 7. Vehicles. The script `database/show-sample-data.bash`.
 
 In this update I'm updating the script `database/create-tables.sql` with the creation of the table `vehicles`, and the script `database/insert-data.sql` with the generation and insertion of data for that table.
