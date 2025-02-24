@@ -8,6 +8,12 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 7. Vehicles. The script `database/show-sample-data.bash`.
+
+In this update I'm updating the script `database/create-tables.sql` with the creation of the table `vehicles`, and the script `database/insert-data.sql` with the generation and insertion of data for that table.
+
+Additionally, I'm publishing the script `database/show-sample-data.bash`. It facilitates validating that tables contain expected data.
+
 ## Update 6. The scripts `database/create-tables.sql` and `database/insert-data.sql`.
 
 In this update I'm publishing the scripts `database/create-tables.sql` and `database/insert-data.sql`. They are simplified versions of the scripts with the same names that I have created back when this project still was a subproject.
