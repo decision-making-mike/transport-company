@@ -1,0 +1,51 @@
+#!/bin/bash
+
+file='technology-statistics.txt'
+
+#ABC
+> "$file" \
+    echo \
+        'EXTENSION COUNT EXTENSION' \
+    && {
+        cat \
+            <(
+                git \
+                    ls-tree \
+                    'master' \
+                    -r \
+                    --name-only \
+            ) \
+            <(
+                git \
+                    diff \
+                    --cached \
+                    --name-only
+            ) \
+            | sort \
+                -u \
+            | sed \
+                -E \
+                's:.*/([^/]*)$:\1:' \
+            | gawk \
+                '{
+                    if( $0 ~ /^\./ )
+                    {
+                        print "(Dotfile)"
+                    }
+                    else if( $0 ~ /\./ )
+                    {
+                        match( $0 , /^[^.]*\.(.*)$/ , captured_groups )
+                        print captured_groups[ 1 ]
+                    }
+                    else
+                    {
+                        print "(Not a dotfile and no extension)"
+                    }
+                }' \
+            | sort \
+            | >> "$file" \
+                uniq \
+                    -c
+    } && git \
+        add \
+        "$file"

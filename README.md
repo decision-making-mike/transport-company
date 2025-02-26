@@ -8,6 +8,20 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+[technology-statistics.txt](technology-statistics.txt)
+
+## Update 10. Experimental introduction of automatic technology statistics of the repository.
+
+In this update I'm experimentally introducing automatic technology statistics of the repository. They are included in the file `technology-statistics.txt`. The reader can access the file directly in the repository, as well as through a link at the beginning of this README.
+
+Currently the statistics consists only of a list of numbers of files in the repository whose names contain particular extensions. I may consider enhancing them in the future.
+
+The statistics are automatic because they are generated automatically by Git's hook `pre-commit`. Now, it wasn't obvious how to let the reader see the hook. By default it should reside in the file `pre-commit`, in the directory `.git/hooks`. As I observe, Git doesn't let me `git add` this file when it's in that directory. I have resolved to move the file to the directory `.githooks`. I then did `git config --local core.hooksPath .githooks/`, as suggested by bbarker in [this Stackoverflow answer](https://stackoverflow.com/a/54281447/27799074). The only inconvenience is that now, after the repository is cloned, one needs to likewise change `core.hooksPath` for the new repository.
+
+As the reader can see in the hook, I have ensured that the statistics include any new files which are part of the current commit, that is, that one that the hook is run before.
+
+The introduction is experimental because I am yet to see how I like the statistics. Also, during the development of the project there may show up some edge cases I'm currently not aware of that will prevent the statistics to be properly generated, hence to be useful.
+
 ## Update 9. Parcels.
 
 In this update I'm updating the script `database/create-tables.sql` with the creation of the table `parcels`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.
