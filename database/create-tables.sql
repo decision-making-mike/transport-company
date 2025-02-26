@@ -15,3 +15,9 @@ create
         name varchar,
         value varchar
     );
+
+create
+    table parcels (
+        id integer primary key generated always as identity,
+        order_id integer not null references orders
+    );

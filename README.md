@@ -8,6 +8,14 @@
 
 [completed-reads.txt](completed-reads.txt)
 
+## Update 9. Parcels.
+
+In this update I'm updating the script `database/create-tables.sql` with the creation of the table `parcels`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.
+
+Moreover, I'm fixing a bug in the insertion of data into the table `parameters`. I used the character double quote `"` instead of the character single quote `'`. By that, instead of defining string constants, what I desired, I defined delimited identifiers. As a result, as far as I understand it, PostgreSQL was interpreting the identifiers as column names, and was inserting the same values into the column `name` that it was inserting into the column `value`. That in turn was causing that I was getting `null` when making a `select` on that table when inserting data into the table `parcels`.
+
+Moreover, I'm decreasing the number of orders to generate from 10 thousand to 1 thousand. This is for the generation and insertion of parcels to take reasonable time, as 1 order may generate up to $1000 / 5 = 200$ parcels.
+
 ## Update 8. Parameters.
 
 In this update I'm updating the script `database/create-tables.sql` with the creation of the table `parameters`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table (should it be "the showing", not "showing"?).

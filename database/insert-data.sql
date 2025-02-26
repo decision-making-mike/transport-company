@@ -3,7 +3,7 @@
 do
 $$
     declare
-        count integer := 10000;
+        count integer := 1000;
         max_total_cargo_weight_in_kg integer := 1000;
         total_cargo_weight_in_kg integer;
         k integer;
@@ -44,7 +44,41 @@ $$
         insert
             into parameters (name, value)
             values
-                ("service_price", service_price),
-                ("max_parcel_weight_in_kg", max_parcel_weight_in_kg);
+                ('service_price', service_price),
+                ('max_parcel_weight_in_kg', max_parcel_weight_in_kg);
     end;
 $$;
+
+-- Generation and insertion of parcels.
+
+do
+$$
+    declare
+        max_parcel_weight_in_kg integer := (
+            select value
+            from parameters
+            where name = 'max_parcel_weight_in_kg'
+        );
+        k integer;
+        m integer;
+        parcel_count integer;
+        total_cargo_weight_in_kg_array integer [] := array (
+            select total_cargo_weight_in_kg
+            from orders
+        );
+        total_cargo_weight_in_kg_array_length integer := array_length (
+            total_cargo_weight_in_kg_array,
+            1
+        );
+    begin
+        for k in 1..total_cargo_weight_in_kg_array_length loop
+            parcel_count := ceiling (total_cargo_weight_in_kg_array [k] / max_parcel_weight_in_kg);
+            for m in 1..parcel_count loop
+                insert
+                    into parcels (order_id)
+                    values
+                        (k);
+            end loop;
+        end loop;
+    end;
+$$
