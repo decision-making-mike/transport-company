@@ -10,6 +10,10 @@
 
 [technology-statistics.txt](technology-statistics.txt)
 
+## Update 12. Deliveries.
+
+In this update I'm updating the script `database/create-tables.sql` with the creation of the table `deliveries`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.
+
 ## Update 11. Shipments.
 
 In this update I'm updating the script `database/create-tables.sql` with the creation of the table `shipments`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.

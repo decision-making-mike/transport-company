@@ -28,3 +28,9 @@ create
         vehicle_id integer not null references vehicles,
         parcel_id integer not null references parcels
     );
+
+create
+    table deliveries (
+        id integer primary key generated always as identity,
+        shipment_id integer not null references shipments
+    );
