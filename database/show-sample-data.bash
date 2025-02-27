@@ -84,3 +84,16 @@ psql \
         echo 1>&2 "Error when performing query, exiting"
         exit 1
     }
+
+echo '====================='
+echo 'Table "Made payments"'
+echo '====================='
+psql \
+        -U 'postgres' \
+        -p "$port" \
+        'transport-company' \
+        -c "select * from made_payments limit 10;" \
+    || {
+        echo 1>&2 "Error when performing query, exiting"
+        exit 1
+    }

@@ -34,3 +34,9 @@ create
         id integer primary key generated always as identity,
         shipment_id integer not null references shipments
     );
+
+create
+    table made_payments (
+        id integer primary key generated always as identity,
+        amount integer not null
+    );

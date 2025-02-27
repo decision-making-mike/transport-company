@@ -10,6 +10,12 @@
 
 [technology-statistics.txt](technology-statistics.txt)
 
+## Update 13. Made payments.
+
+In this update I'm updating the script `database/create-tables.sql` with the creation of the table `made_payments`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.
+
+It is worth to note that as the table `made_payments` can be created and filled with data, I could say the project has achieved a certain threshold of completeness. Now all the tables mentioned in the current version of ER model can be created and filled with data. Also, the data in all of them can be verified by means of the script `database/show-sample-data.bash`. There seems to be the right time now to move to the task of increasing the performance of data preparation and insertion.
+
 ## Update 12. Deliveries.
 
 In this update I'm updating the script `database/create-tables.sql` with the creation of the table `deliveries`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.
