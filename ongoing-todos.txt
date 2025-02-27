@@ -1,2 +1,1 @@
-Creation of tables
-Preparation and insertion of data
+Improvement of performance of data insertion
