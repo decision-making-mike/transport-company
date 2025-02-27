@@ -10,6 +10,10 @@
 
 [technology-statistics.txt](technology-statistics.txt)
 
+## Update 11. Shipments.
+
+In this update I'm updating the script `database/create-tables.sql` with the creation of the table `shipments`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.
+
 ## Update 10. Experimental introduction of automatic technology statistics of the repository.
 
 In this update I'm experimentally introducing automatic technology statistics of the repository. They are included in the file `technology-statistics.txt`. The reader can access the file directly in the repository, as well as through a link at the beginning of this README.

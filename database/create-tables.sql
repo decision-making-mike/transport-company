@@ -21,3 +21,10 @@ create
         id integer primary key generated always as identity,
         order_id integer not null references orders
     );
+
+create
+    table shipments (
+        id integer primary key generated always as identity,
+        vehicle_id integer not null references vehicles,
+        parcel_id integer not null references parcels
+    );
