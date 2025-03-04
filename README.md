@@ -10,6 +10,122 @@
 
 [technology-statistics.txt](technology-statistics.txt)
 
+## Update 15. The syntax of the project.
+
+In this update I'm publishing how the project would be to be used if the scripts were to be run. This is both a reminder to my future self and a showcase for recruiters.
+
+It could be a possible enhancement for the project to add a script facilitating automatic checking of all the requirements. Such a script could even install lacking software. But I currently don't think this is what I should spend my time and energy for.
+
+Important note. The requirements and syntax below describe the current state of the project. It means that both may change in the future, and most probably will.
+
+### Requirements for using the syntax.
+
+#### Package requirements.
+
+The following packages need to be installed, and in the version given. It can be checked with
+
+```
+apt list --installed <package>
+```
+
+| Package. | Version.
+| - | -
+| `bash` | 5.0.
+| `findutils` | 4.7.0.
+| `graphviz` | 2.42.2.
+| `gawk` | 5.0.1.
+| `grep` | 3.4.
+| `eog` | 3.36.3.
+| `time` | 1.7.
+
+#### `PATH` requirements.
+
+The following commands need to be in `PATH`. It can be checked in Bash with
+
+```bash
+type -P <command>
+```
+
+| Command.
+| -
+| `bash`
+| `psql`
+| `find`
+| `xargs`
+| `dot`
+| `gawk`
+| `awk`
+| `grep`
+| `eog`
+
+#### Other requirements.
+
+| Requirement. | Example command to check it.
+| - | -
+| PostgreSQL 17.4 installed. | `psql -U postgres -c 'select version ();'`
+| (An instance of?) PostgreSQL 17.4 running. | `pg_lsclusters`
+
+### Syntax.
+
+| Task. | Command. | Directory that the command should be executed in, relative to the project's root directory. | Notes
+| - | - | - | -
+| Creating the database, removing the old one if it exists, generating data, and inserting them. | `bash reset-database.bash [<port>] [<times log file>]` | `./database` | `<times log file>` means a file that is to be used for logging the times of data generation and insertion.
+| Benchmarking data insertion and generation. | `./bash benchmark-data-insertion.bash <times log file>` | `./database` | `<times log file>` means as above.
+| Verifying that the data has been generated and inserted correctly. | `bash show-sample-data.bash` | `./database`
+| Creating PNG files from DOT graphs across the whole project, and displaying the files. | `bash visualize-graphs.bash` | `./`
+
+## Update 14. The performance of the generation and insertion of data.
+
+I have indicated in update 6, and it still seems to me, that the data generation and insertion could take less time. To optimally optimize those operations, first I need to benchmark them.
+
+Now, I feel that before benchmarking, I could read more about it, not only in PostgreSQL, but in general. I've saved some to-reads, yet I don't plan to do it right now. Reading and understanding these things would be going to take time. I had better have something done before I run out of my motivation for making my portfolio.
+
+Let us start gently. We consider first what does it mean for the generation and insertion of data to take less time. Those operations are in their entirety done by means of the script `database/insert-data.sql`. There is no other command in this script. So, those operations' taking less time means that the execution of this script takes less time.
+
+So, a simple benchmark could be to execute the script several times, measure the times each time, and calculate the averages. In principle, we could then make some changes to the commands and run the benchmark again to compare. But how do we know what parts of the script we need to change?
+
+We conclude we need a more granular benchmark. Let's consider the architecture of the script. It consists of several commands `do`, each of them being responsible for generating and inserting data for one table. Worth to note, every new table I should introduce in the database in the future is going to likewise have one command `do` for data generation and insertion.
+
+The first solution we see is to measure the times of particular commands. And we conclude we need no more solutions, that is, no more granular benchmarking. The commands are simple enough for more granularity not about to bring better insight. An advantage of stopping here is, every future table can be benchmarked the same way.
+
+But such a benchmark includes an implicit assumption that for every command, either every execution of it should take the same amount of time, or the differences should be neglectable. Neither of these options we shall regard as true if we consider that some commands generate random data.
+
+To understand it, let's say I've made changes to such a command. I believe that they improve its performance. But when I'm benchmarking the command afterwards, I see that it sometimes takes more time to execute it, sometimes less. What follows, I cannot know whether its performance has increased. And this variability is due to the fact that sometimes this command generates more data, sometimes less.
+
+In reality I observe that the differences between execution times of the whole script can be tens of seconds. In conclusion, we shall somehow normalize the average execution times of particular commands, so that for every command they be comparable.
+
+For the record, let's put aside how predictable or unpredictable the performance of processing the script by the database, the operating system and the hardware could be. I'm not confident enough to discuss it.
+
+Let the main factor in the performance of a command be the number of rows inserted. I have not measured it, but for simplicity let's assume it is the case. Should the future prove me wrong, I'll reconsider this assumption. This way, I'm going to do the normalization by dividing the execution time of a command by this number.
+
+I have evaluated the number of rows inserted for every command. The reader can find them in the table below. To simplify the descriptions, I'm identifying particular commands with the entities that are represented by the rows those commands insert.
+
+| Entity | How many there are to be inserted
+| - | -
+| Order | $1000$
+| Vehicle | $10000$
+| Parameter | $2$
+| Parcel | $1000 \cdot ceiling (random (1, 1000) \div random (5, 50))$
+| Shipment | $1000$
+| Delivery | $1000$
+| Made payment | $2000$
+
+It can be seen that the number of rows is random only in the case of the command where the rows represent parcels. I might then normalize the execution times for this command only, as we don't plan to compare the average times of different commands. But for consistency I'll do that for every command.
+
+I'm not going to keep the reader in suspense whether all of what I have just said is reasonable and will give expected results. Together with the above considerations, in this update I'm publishing appropriate changes in the scripts. I'm including the results of benchmarking, too. A general description of the changes follows.
+
+I could think of three ways for getting the execution times. One, I would create an additional table, make the times be calculated in the PL/pgSQL code, and save them in this table. Two, instead of using a table, I would save the times to a file. Three, I would change the scripts `database/insert-data.sql` and `database/reset-database.bash` so that each of the commands be executed by a separate command `psql`. I would then measure the times in Bash instead of PL/pgSQL. This last way is in contrast to the current situation when the whole script is executed by one command `psql`.
+
+I have chosen the last way. Possibly because it felt not right to me to mix benchmarking with business in the database. In `reset-database.bash`, I have added the requirement to provide a log file as a parameter. I have made this script execute commands from the new script `insert-data.bash`, and I have removed the old script `insert-data.sql`.
+
+In `insert-data.bash`, I have put invocations of the program `/bin/time`. I'm mentioning this change because I'm not used to put full paths of programs in my scripts. Let me here explain the reason to my future self. Bash would interpret a lone `time` as a reserved word, and process it accordingly. As much as this processing is close to what the command `/bin/time` does, Bash apparently won't let me easily redirect the captured time to a file. Well, it of course may be that I just don't know an easy way. Anyway, not having it redirected would result in its going together will all other output. So, I would need to filter out this all other output. This seemed clunky to me.
+
+I have moved particular commands `do` to individual files, and put those files in the directory `data-generation-insertion`.
+
+I've created the script `benchmark-data-insertion.bash`, and its helper script `process-benchmarking-results.awk`. One unfortunate thing is that I have tight-coupled them, by using the "names of times" given the Bash script in the AWK script. These are "orders_generation_and_insertion_time_in_seconds" and so on. In case I change them, I will need to change them in both files. Another unfortunate thing is that in the Bash script I repeat for every command nearly the whole code for measuring the time of a command. Instead, it could be done using a loop. In the future I'm going to think about changing these things.
+
+On a final note, I could write here how to actually perform the benchmarking. But let me leave it to the upcoming update 15.
+
 ## Update 13. Made payments.
 
 In this update I'm updating the script `database/create-tables.sql` with the creation of the table `made_payments`, the script `database/insert-data.sql` with the generation and insertion of data for that table, and the script `database/show-sample-data.bash` with the showing of the data in that table.

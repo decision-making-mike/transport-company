@@ -6,8 +6,9 @@ port="$1"
 if [[ -z "$port" ]]
 then port=5432
 fi
+data_insertion_times_log_file="$2"
 tables_creation_file='create-tables.sql'
-data_insertion_file='insert-data.sql'
+data_insertion_file='insert-data.bash'
 
 if [[ ! -f "$tables_creation_file" || ! -f "$data_insertion_file" ]]
 then
@@ -36,14 +37,11 @@ psql \
         exit 1
     }
 
-time {
-    psql \
-            -U 'postgres' \
-            -p "$port" \
-            'transport-company' \
-            -f "$data_insertion_file" \
+bash \
+    "$data_insertion_file" \
+    "$port" \
+    "$data_insertion_times_log_file" \
         || {
             echo 1>&2 "Error when inserting data, exiting"
             exit 1
         }
-}
