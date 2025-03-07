@@ -5,8 +5,8 @@ EXTENSION COUNT EXTENSION
       1 (Dotfile)
       1 dot.png
       1 jpg
-      1 md
+      2 md
       1 (Not a dotfile and no extension)
       1 odg
-      9 sql
+      8 sql
       5 txt
