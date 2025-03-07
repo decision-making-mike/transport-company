@@ -14,13 +14,15 @@ function get_longest_element_length( array, n, max )
     return max
 }
 {
-    if( $0 !~ /^[ ]*\[label="[^"]*"\]$/ )
+    if( $0 !~ /^[ ]*\[label=".*"\]$/ )
     {
         print
     }
     else
     {
-        split( $0, line_parts, "\"" )
+        split( $0, line_parts, "=" )
+        sub( /^"/, "", line_parts[ 2 ] )
+        sub( /"\]/, "", line_parts[ 2 ] )
         label_content = line_parts[ 2 ]
         split( label_content, words, " " )
         if( length( words ) == 1 )
@@ -81,7 +83,7 @@ function get_longest_element_length( array, n, max )
                 ++ n
             }
         }
-        printf( line_parts[ 1 ] "\"" )
+        printf( line_parts[ 1 ] "=\"" )
         for( k = 1 ; k <= length( words1 ) ; ++ k )
         {
             printf( words1[ k ] )
@@ -90,7 +92,7 @@ function get_longest_element_length( array, n, max )
                 printf( "\n" )
             }
         }
-        print "\"" line_parts[ 3 ]
+        print "\"]"
         # We get rid of the arrays for it seems AWK does not do it itself after processing a line.
         delete line_parts
         delete words
