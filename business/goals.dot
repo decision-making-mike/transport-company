@@ -5,7 +5,7 @@ digraph {
     rankdir="RL"
 
     subgraph strategic_goals {
-        label="Strategic goals (speaking differently, the top management's goals)"
+        label="Strategic goals\n(speaking differently,\nthe top management's goals)."
         cluster="true"
 
         profitability
@@ -109,7 +109,7 @@ digraph {
     expenses_reduction -> profitability
 
     subgraph information_storage_goals {
-        label="Information storage goals"
+        label="Information storage goals."
         cluster=true
 
         refueling_payments_storage

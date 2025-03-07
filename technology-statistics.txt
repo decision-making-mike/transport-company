@@ -9,4 +9,4 @@ EXTENSION COUNT EXTENSION
       1 (Not a dotfile and no extension)
       1 odg
       8 sql
-      5 txt
+      4 txt
