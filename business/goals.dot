@@ -1,5 +1,5 @@
 digraph {
-    label="The goals of the company. Strategic goals have been put in a cluster for better readability, similarly information storage goals."
+    label="The goals of the company.\nStrategic goals have been put in a cluster\nfor better readability, similarly information storage goals."
     // " A node with a solid border means the top management's goal, a node with a dashed border means the finance department's goal, a node with a dotted border means the IT department's goal, a node with a bold border means the transportation department's goal, a node with diagonals means the human resources department's goal, and a filled node means the customer service department's goal."
     // ranksep="1"
     rankdir="RL"
