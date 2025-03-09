@@ -1,5 +1,45 @@
 # Transport company
 
+## Update 17. The structure of the project. Two ways of developing the company.
+
+In this update I'm presenting a more elaborate description of the structure of the project than that the reader could see in the README up to now. Later, I'm discussing two ways of developing the company. I thought both these things could help me not to get lost in the project.
+
+First the structure. One can view the project in three ways. One, the project is a set of files. Two, the project is a set of two parts, the business part and the database part. Three, the project is a set of levels. Below I'm describing how those three interrelate. A note, I treat the files in the directory `business/archive` as not related to any level.
+
+Level one, the stakeholders view of the company. I have chosen it to be the topmost level because the second level, the goals of the company, originated from it in a way. The stakeholders view belongs to the business part. Related files include `business/stakeholders.jpg`.
+
+Level two, the goals of the company. In a way, they have originated from the stakeholders view, and for this reason I treat them as the second level. They belong to the business part. Related files include `business/goals.dot`.
+
+Level three, the entity-relationship model of the company. It is to be implemented according to the goals of the company, thus makes the third level. It belongs to the database part. Related files include `database/er-model.dot`.
+
+Level four, the definitions of the tables. The definitions are to be implemented according to the entity-relationship diagram, thus makes the fourth level. They belong to the database part. Related files include `database/create-tables.sql`.
+
+Level five, the generation and insertion of data. Data can only be generated for and inserted to the tables that have been created. Therefore, the generation and insertion make the fifth level. They belong to the database part. Related files include files in the directory `database/data-generation-insertion`, and the files `database/insert-data.bash` and `benchmark-data-insertion.bash`.
+
+Level six, the queries. There are none yet. Their purpose is to answer the questions presented as the goals of the company, and earlier yet in the project "SQL and PostgreSQL learning", in update "2024-11-22". The queries belong to the database part.
+
+To better visualize what it all looks like, I'm posting below also its graphical version. I don't show the files for the diagram to be more readable.
+
+![a diagram of the structure of the project as of 2025-03-09](archive/project-structure-2025-03-09.dot.png)
+
+Second, the two ways of developing the company.
+
+In way one, I implement a new feature through all the levels from the goals to the queries. Let us omit the first level, the stakeholders view, because it is too general to be of much use here. It can be only a guide for how the company should look like, or rather, what should I take into account first when creating the company.
+
+Let us have an example of this way. Say I wanted to make the company pay taxes. I would first need to prepare some new, tax-related goals, maybe make changes to the existing goals. Then there should go changes in the entity-relationship model, then in the definitions of the tables, then in the generation and insertion of data, and finally in the queries.
+
+As for benefits, this way always gets the job done for a single feature. Once I've decided that a feature is to be implemented, I will either implement it through all the levels, or abandon and roll back any changes I've made so far.
+
+As for drawbacks, this way requires constant context switching. Also, it's difficult because different features maps differently between levels. For example, one goal may map to multiple entities, or the other way around, one entity may map to multiple goals.
+
+In way two, I implement multiple new features on a given level one after another, not caring about their implementation on the levels below. Of course, the level above that level has to have implemented each of the features, as the level below must be in accordance with it.
+
+For an example, let's say I wanted the company to pay taxes and buy properties. Both of these features I could first implement as goals. Only if, say, I felt I had the time and energy, I would decide to implement them on other levels.
+
+As for benefits, this way allows less stringent context switching. In turn, I can focus my attention on the inner coherence of a level.
+
+As for drawbacks, this way favors partial implementation of features. It means the company might have goals, but no ER model entities for them, or ER model entities, but no tables for them, et cetera.
+
 ## Update 16. A repository cleanup.
 
 I thought that the repository could use a small cleanup.

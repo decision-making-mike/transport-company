@@ -1,9 +1,9 @@
 EXTENSION COUNT EXTENSION
       1 awk
       5 bash
-      2 dot
+      3 dot
       1 (Dotfile)
-      1 dot.png
+      2 dot.png
       1 jpg
       2 md
       1 (Not a dotfile and no extension)

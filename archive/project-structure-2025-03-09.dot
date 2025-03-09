@@ -1,0 +1,57 @@
+digraph {
+    label = "The structure of the project\nas of March 9, 2025."
+    node
+        [shape = "record"]
+
+    subgraph business_part {
+        label="The business part."
+        cluster="true"
+
+        stakeholders_view
+            [label="{LEVEL 1
+|The stakeholders view\l
+of the company.\l
+            }"]
+
+        goals
+            [label="{LEVEL 2
+|The goals\l
+of the company.\l
+            }"]
+    }
+
+    subgraph {
+        label="The database part."
+        cluster="true"
+
+        er_model
+            [label = "{LEVEL 3
+|The entity-relationship model\l
+of the company.\l
+            }"]
+
+        tables_definitions
+            [label = "{LEVEL 4
+|The definitions\l
+of the tables.\l
+            }"]
+
+        data_generation_and_insertion
+            [label="{LEVEL 5
+|The generation\l
+and insertion of data.\l
+            }"]
+
+        queries
+            [label="{LEVEL 6
+|Queries.
+            }"]
+    }
+
+    stakeholders_view
+        -> goals
+        -> er_model
+        -> tables_definitions
+        -> data_generation_and_insertion
+        -> queries
+}
