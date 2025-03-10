@@ -1,0 +1,188 @@
+digraph {
+    label = "The structure of the project\nas of March 9, 2025, version 2."
+    rankdir = "LR"
+
+    subgraph {
+        cluster = "true"
+        label = "Way one of viewing the project.\nSets of files."
+    
+        main_files
+            [label = "Main files."]
+
+        auxiliary_files
+            [label = "Auxiliary files."]
+
+        archived_files
+            [label = "Archived files."]
+    }
+
+    subgraph {
+        cluster = "true"
+        label = "Way two of viewing the project.\nParts."
+
+        business_part
+            [label = "The business part of the project."]
+
+        database_part
+            [label = "The database part of the project."]
+    }
+
+    main_files -> business_part
+
+    main_files -> database_part
+
+    subgraph third_viewing_way {
+        cluster = "true"
+        label = "Way three of viewing the project.\nLevels."
+
+        level_1
+            [label = "Level 1. The stakeholders view of the company."]
+
+        level_2
+            [label = "Level 2. The goals of the company."]
+
+        level_3
+            [label = "Level 3. The entity-relationship model of the company."]
+
+        level_4
+            [label = "Level 4. The definitons of the tables."]
+
+        level_5
+            [label = "Level 5. The generation and insertion of data."]
+
+        level_6
+            [label = "Level 6. Queries. No files for now."]
+    }
+
+    business_part -> level_1
+
+    business_part -> level_2
+
+    database_part -> level_3
+
+    database_part -> level_4
+
+    database_part -> level_5
+
+    database_part -> level_6
+
+    subgraph {
+        cluster = "true"
+        label = "Way four of viewing the project.\nFiles."
+
+        business_goals_dot
+            [label = "business/goals.dot"]
+
+        business_stakeholders_jpg
+            [label = "business/stakeholders.jpg"]
+
+        database_er_model_dot
+            [label = "database/er-model.dot"]
+
+        database_create_tables_sql
+            [label = "database/create-tables.sql"]
+
+        database_data_generation_insertion
+            [label = "The files in the directory \"database/data-generation-insertion\"."]
+
+        database_insert_data_bash
+            [label = "database/insert-data.bash"]
+
+        dot_githooks_pre_commit
+            [label = ".githooks/pre-commit"]
+
+        database_benchmark_data_insertion_bash
+            [label = "database/benchmark-data-insertion.bash"]
+
+        database_reset_database_bash
+            [label = "database/reset-database.bash"]
+
+        dababase_show_sample_data_bash
+            [label = "database/show-sample-data.bash"]
+
+        dot_gitattributes
+            [label = ".gitattributes"]
+
+        readme_md
+            [label = "README.md"]
+
+        blog_md
+            [label = "blog.md"]
+
+        completed_reads_txt
+            [label = "completed-reads.txt"]
+
+        completed_todos_txt
+            [label = "completed-todos.txt"]
+
+        ongoing_todos_txt
+            [label = "ongoing-todos.txt"]
+
+        split_labels_contents_awk
+            [label = "split-labels-contents.awk"]
+
+        technology_statistics_txt
+            [label = "technology-statistics.txt"]
+
+        visualize_graphs_bash
+            [label = "visualize-graphs.bash"]
+
+        archive_project_structure_2025_03_09_dot
+            [label = "archive/project-structure-2025-03-09.dot"]
+
+        archive_project_structure_2025_03_09_dot_png
+            [label = "archive/project-structure-2025-03-09.dot.png"]
+
+        business_archive_goals_2025_02_13_dot_png
+            [label = "business/archive/goals-2025-02-13.dot.png"]
+
+        business_archive_stakeholders_odg
+            [label = "business/archive/stakeholders.odg"]
+    }
+
+    level_1 -> business_goals_dot
+
+    level_2 -> business_stakeholders_jpg
+
+    level_3 -> database_er_model_dot
+
+    level_4 -> database_create_tables_sql
+
+    level_5 -> database_data_generation_insertion
+
+    level_5 -> database_insert_data_bash
+
+    auxiliary_files -> dot_githooks_pre_commit
+
+    auxiliary_files -> database_benchmark_data_insertion_bash
+
+    auxiliary_files -> database_reset_database_bash
+
+    auxiliary_files -> dababase_show_sample_data_bash
+
+    auxiliary_files -> dot_gitattributes
+
+    auxiliary_files -> readme_md
+
+    auxiliary_files -> blog_md
+
+    auxiliary_files -> completed_reads_txt
+
+    auxiliary_files -> completed_todos_txt
+
+    auxiliary_files -> ongoing_todos_txt
+
+    auxiliary_files -> split_labels_contents_awk
+
+    auxiliary_files -> technology_statistics_txt
+
+    auxiliary_files -> visualize_graphs_bash
+
+    archived_files -> archive_project_structure_2025_03_09_dot
+
+    archived_files -> archive_project_structure_2025_03_09_dot_png
+
+    archived_files -> business_archive_goals_2025_02_13_dot_png
+
+    archived_files -> business_archive_stakeholders_odg
+}

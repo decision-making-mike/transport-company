@@ -1,5 +1,27 @@
 # Transport company
 
+## Update 18. An update to the structure of the project.
+
+In the preceding update I have described the structure of the project. But now I see it as incomplete. So, in this update I'd like to update it.
+
+On the one hand, in the README I say that "[o]ne could think of the project as a theoretical basis for a transport company". The structure that I have described is aligned with this statement. It represents all those "standards, overviews, rules, scripts, and the like" of the company, to also quote the README.
+
+On the other hand, there are files that are not included in this definition of the project and in the structure. These are the files in the directory `business/archive`, the file `blog.md`, and other. They are only indirectly related to the company, and don't fall into any level of the project I've listed in the preceding update.
+
+What to do with those files? I've decided to add a fourth way of viewing the project, in addition to the three mentioned in the preceding update. This new way divides the project into three sets of files.
+
+Set one contains "main files", as we shall call them. These are all the files that are directly related to the development of the company, and that are described as part of the structure of the project in the preceding update. An exception is `database/benchmark-data-insertion.bash`. This file shall be treated as an auxiliary one even though I have mentioned it in the preceding update. Without these files the project wouldn't exist.
+
+Set two contains "auxiliary files", as we shall call them. These include all the files in the main directory of the repository, for example `blog.md`, and the files `database/reset-database.bash`, `database/benchmark-data-insertion.bash` and `database/show-sample-data.bash`. Without them the project would exist, but would be little to much nonfunctional.
+
+Set three contains archived files. These include the files in any directory `archive` throughout the project. I'm putting them into a separate category just because they don't seem to fit into the other two.
+
+Below I'm posting the second version of the diagram from the preceding update.
+
+![a diagram of the structure of the project as of 2025-03-09, version 2](archive/project-structure-2025-03-09-version-2.dot.png)
+
+By the way, on the diagram I can notice that the script for splitting the labels into lines moved the numbers of the levels to the next lines. I find that presenting numbers in such a way hinders readbility. I've prepared a TODO to change that.
+
 ## Update 17. The structure of the project. Two ways of developing the company.
 
 In this update I'm presenting a more elaborate description of the structure of the project than that the reader could see in the README up to now. Later, I'm discussing two ways of developing the company. I thought both these things could help me not to get lost in the project.
@@ -14,7 +36,7 @@ Level three, the entity-relationship model of the company. It is to be implement
 
 Level four, the definitions of the tables. The definitions are to be implemented according to the entity-relationship diagram, thus makes the fourth level. They belong to the database part. Related files include `database/create-tables.sql`.
 
-Level five, the generation and insertion of data. Data can only be generated for and inserted to the tables that have been created. Therefore, the generation and insertion make the fifth level. They belong to the database part. Related files include files in the directory `database/data-generation-insertion`, and the files `database/insert-data.bash` and `benchmark-data-insertion.bash`.
+Level five, the generation and insertion of data. Data can only be generated for and inserted to the tables that have been created. Therefore, the generation and insertion make the fifth level. They belong to the database part. Related files include files in the directory `database/data-generation-insertion`, and the files `database/insert-data.bash` and `database/benchmark-data-insertion.bash`.
 
 Level six, the queries. There are none yet. Their purpose is to answer the questions presented as the goals of the company, and earlier yet in the project "SQL and PostgreSQL learning", in update "2024-11-22". The queries belong to the database part.
 
