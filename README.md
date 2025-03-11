@@ -14,7 +14,7 @@ A note about GitHub issues. I don't know if this README and the project as a who
 
 ## The blog of the project.
 
-The project has a blog, in file [`blog.md`](blog.md). There, one can read an extensive description of the changes as the project's development continues.
+The project has a blog, in the file [`blog.md`](blog.md). There, one can read an extensive description of the changes as the project's development continues.
 
 ## Usage of the project's scripts.
 
