@@ -1,2 +1,5 @@
 *.sql linguist-detectable=true
 *.sql linguist-language=sql
+
+*.dot linguist-detectable=true
+*.dot linguist-language=graphviz
