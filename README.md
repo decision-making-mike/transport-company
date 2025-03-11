@@ -10,7 +10,7 @@ A note about GitHub issues. I don't know if this README and the project as a who
 
 ## The structure of the project.
 
-In the project one can differentiate two main interrelated parts. One, the business part, and two, the database part. Files related to the business part are in the directory `business`, and files related to the database part are in the directory `database`. Other than files related directly to those parts, there are various other files, like `blog.md` (see below). They can be found in the main directory of the repository.
+![a diagram of the structure of the project, version 3, March 11, 2025](archive/project-structure-version-3-2025-03-11.dot.png)
 
 ## The blog of the project.
 
@@ -70,7 +70,7 @@ type -P <command>
 | Task. | Command. | Directory that the command should be executed in, relative to the project's root directory. | Notes.
 | - | - | - | -
 | Creating the database, removing the old one if it exists, generating data, and inserting them. | `bash reset-database.bash [<port>] [<times log file>]` | `./database` | `<times log file>` means a file that is to be used for logging the times of data generation and insertion.
-| Benchmarking data insertion and generation. | `./bash benchmark-data-insertion.bash <times log file>` | `./database` | `<times log file>` means as above.
+| Benchmarking data insertion and generation. | `bash benchmark-data-insertion.bash <times log file>` | `./database` | `<times log file>` means as above.
 | Verifying that the data has been generated and inserted correctly. | `bash show-sample-data.bash` | `./database`
 | Creating PNG files from DOT graphs across the whole project, and displaying the files. | `bash visualize-graphs.bash` | `./`
 
