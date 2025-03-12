@@ -1,5 +1,9 @@
 # Transport company
 
+## Update 20. `split-labels-contents.awk` changes.
+
+In this update I'm introducing two changes in the script `split-labels-contents.awk`. One, there are allowed now spaces around the equal sign in labels. The reason for the change is, spaces there improve readability. Two, the script produces now strings `\n` instead of actual newline characters. The reason for the change is, `dot` for some, unknown to me reason treats actual newlines as if they don't exist if the shape of the node is `record`. This means in the diagram there are no newlines where they should be, which means, words are concatenated without any separator.
+
 ## Update 19. First query. Changes in the goals.
 
 Having prepared a benchmark (see update 14), a natural follow-up would be to try to optimize the code. But I have decided to go back to answering business questions, those listed far back in update "2024-11-22" of the project "SQL and PostgreSQL learning".

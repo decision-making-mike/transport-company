@@ -14,14 +14,14 @@ function get_longest_element_length( array, n, max )
     return max
 }
 {
-    if( $0 !~ /^[ ]*\[label=".*"\]$/ )
+    if( $0 !~ /^[ ]*\[label ?= ?".*"\]$/ )
     {
         print
     }
     else
     {
         split( $0, line_parts, "=" )
-        sub( /^"/, "", line_parts[ 2 ] )
+        sub( /^ ?"/, "", line_parts[ 2 ] )
         sub( /"\]/, "", line_parts[ 2 ] )
         label_content = line_parts[ 2 ]
         split( label_content, words, " " )
@@ -89,7 +89,7 @@ function get_longest_element_length( array, n, max )
             printf( words1[ k ] )
             if( k < length( words1 ) )
             {
-                printf( "\n" )
+                printf( "\\n" )
             }
         }
         print "\"]"
