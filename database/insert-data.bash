@@ -113,3 +113,17 @@ fi
             'transport-company' \
             -f 'data-generation-insertion/insert-made-payments.sql' \
                 || exit 1
+
+>> "$data_insertion_times_log_file" \
+    echo \
+    -n \
+    'fuel_expenses_generation_and_insertion_time_in_seconds=' \
+        && /bin/time \
+        -ao "$data_insertion_times_log_file" \
+        -f '%E' \
+            psql \
+            -U 'postgres' \
+            -p "$port" \
+            'transport-company' \
+            -f 'data-generation-insertion/insert-fuel-expenses.sql' \
+                || exit 1

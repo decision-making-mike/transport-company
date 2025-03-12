@@ -16,6 +16,9 @@ digraph
     made_payments
         [ label = "{MADE PAYMENTS|ID\lAmount\l}" ]
 
+    fuel_expenses
+        [ label = "{FUEL EXPENSES|ID\lAmount\l}" ]
+
     deliveries
         [ label = "{DELIVERIES|ID\lShipment ID\l}" ]
     deliveries -> shipments

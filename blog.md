@@ -1,5 +1,25 @@
 # Transport company
 
+## Update 19. First query. Changes in the goals.
+
+Having prepared a benchmark (see update 14), a natural follow-up would be to try to optimize the code. But I have decided to go back to answering business questions, those listed far back in update "2024-11-22" of the project "SQL and PostgreSQL learning".
+
+Let me now present the questions once again, but phrase them a bit differently. First, are we profitable? Second, how are we profitable? Third, do we deliver professional service? Fourth, how do we deliver professional service? Fifth, are we a good place to work in? Sixth, how do we are a good place to work in?
+
+In this update I'm answering the first question. I've created the script `database/get-queries-results.bash` and its helper script `database/get-queries-results.sql`. To see all the changes I've made, see the commit. To get the answer for the question, and for any question I shall answer in the future, we go to the directory `database` and execute
+
+```
+bash get-queries-results.bash
+```
+
+Now, the changes in the goals.
+
+One, I've added departments. More information is in the TODO "Addition of departments to the goals of the company", in `completed-todos.txt`.
+
+Two, I've switched the direction of edges. I believe that having `business/goals.dot` formatted this way should let me more easily make changes in them.
+
+Three, I've made I've noted that the strategic goals are the clostest what can be regarded as an implementation of level 1. Likewise, I've marked out those information storage goals that are to be implemented on level 3. Now the interdependence between levels should be more prominent.
+
 ## Update 18. An update to the structure of the project.
 
 In the preceding update I have described the structure of the project. But now I see it as incomplete. So, in this update I'd like to update it.

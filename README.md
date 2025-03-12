@@ -72,6 +72,7 @@ type -P <command>
 | Creating the database, removing the old one if it exists, generating data, and inserting them. | `bash reset-database.bash [<port>] [<times log file>]` | `./database` | `<times log file>` means a file that is to be used for logging the times of data generation and insertion.
 | Benchmarking data insertion and generation. | `bash benchmark-data-insertion.bash <times log file>` | `./database` | `<times log file>` means as above.
 | Verifying that the data has been generated and inserted correctly. | `bash show-sample-data.bash` | `./database`
+| Getting the results of the queries. | `bash get-queries-results.bash` | `./database`
 | Creating PNG files from DOT graphs across the whole project, and displaying the files. | `bash visualize-graphs.bash` | `./`
 
 ## The development of the project.

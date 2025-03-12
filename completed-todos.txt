@@ -1,2 +1,3 @@
 Creation of tables
 Preparation and insertion of data
+2025-03-10. Addition of departments to the goals of the company. Currently, the concept of departments is not introduced to the goals of the company. On the one hand, I don't think this concept should help me to maintain the system of goals, at least regarding its current complexity. On the other hand, it might help others in two ways. First, it might help them not to get lost so much. Second, they might familiarize with the goals more, as the concept of departments is known well.

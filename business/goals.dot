@@ -2,322 +2,304 @@ digraph {
     label="The goals of the company.\nStrategic goals have been put in a cluster\nfor better readability, similarly information storage goals."
     // " A node with a solid border means the top management's goal, a node with a dashed border means the finance department's goal, a node with a dotted border means the IT department's goal, a node with a bold border means the transportation department's goal, a node with diagonals means the human resources department's goal, and a filled node means the customer service department's goal."
     // ranksep="1"
-    rankdir="RL"
+    rankdir="LR"
+    node [shape=record]
 
     subgraph strategic_goals {
-        label="Strategic goals\n(speaking differently,\nthe top management's goals)."
+        label="Strategic goals\n(speaking differently,\nthe top management's goals).\nThese goals are the closest\nwhat can be described\nas an implementation of level 1."
         cluster="true"
 
         profitability
-            [label="To be profitable"]
-            // [label="responsibility=top management"]
+            [label="To be profitable | TOP MANAGEMENT"]
 
         professional_service_delivery
-            [label="To deliver professional service"]
-            // [label="responsibility=top management"]
+            [label="To deliver professional service | TOP MANAGEMENT"]
 
         good_place_to_work
-            [label="To be a good place to work in"]
-            // [label="responsibility=top management"]
+            [label="To be a good place to work in | TOP MANAGEMENT"]
+    }
+
+    profitability -> {
+        profitability_knowledge
+        revenue_increase
+        expenses_reduction
+    }
+
+    professional_service_delivery -> {
+        average_parcel_route_time_reduction
+        professional_service_delivery_knowledge
+    }
+
+    good_place_to_work -> {
+        average_employee_rating_increase
+        good_place_to_work_knowledge
     }
 
     profitability_knowledge
-        [label="To know if it is profitable"]
-        // [label="responsibility=finance department"]
-    profitability_knowledge -> profitability
+        [label="To know if it is profitable | FINANCE DEPARTMENT"]
+    profitability_knowledge -> expenses_revenue_difference_knowledge
 
     expenses_revenue_difference_knowledge
-        [label="To know the difference between its revenue and its total expenses"]
-        // [label="responsibility=finance department"]
-    expenses_revenue_difference_knowledge -> profitability_knowledge
+        [label="To know the difference between its revenue and its total expenses | FINANCE DEPARTMENT"]
+    expenses_revenue_difference_knowledge -> {
+        revenue_knowledge
+        expenses_knowledge
+    }
 
     revenue_knowledge
-        [label="To know its revenue"]
-        // [label="responsibility=finance department"]
-    revenue_knowledge -> expenses_revenue_difference_knowledge
+        [label="To know its revenue | FINANCE DEPARTMENT"]
+    revenue_knowledge -> clients_payments_sum_knowledge
 
     revenue_increase
-        [label="To increase its revenue"]
-        // [label="responsibility=finance department"]
-    revenue_increase -> profitability
+        [label="To increase its revenue | FINANCE DEPARTMENT"]
+    revenue_increase -> service_price_increase
 
     clients_payments_sum_knowledge
-        [label="To know the sum of its clients' payments"]
-        // [label="responsibility=finance department"]
-    clients_payments_sum_knowledge -> revenue_knowledge
+        [label="To know the sum of its clients' payments | FINANCE DEPARTMENT"]
+    clients_payments_sum_knowledge -> particular_clients_payments_knowledge
 
     particular_clients_payments_knowledge
-        [label="To know particular payments of its clients"]
-        // [label="responsibility=finance department"]
-    particular_clients_payments_knowledge -> clients_payments_sum_knowledge
+        [label="To know particular payments of its clients | FINANCE DEPARTMENT"]
+    particular_clients_payments_knowledge -> clients_payments_storage
 
     expenses_knowledge
-        [label="To know its total expenses"]
-        // [label="responsibility=finance department"]
-    expenses_knowledge -> expenses_revenue_difference_knowledge
+        [label="To know its total expenses | FINANCE DEPARTMENT"]
+    expenses_knowledge -> expenses_sum_knowledge
 
     expenses_sum_knowledge
-        [label="To know the sum of its expenses"]
-        // [label="responsibility=finance department"]
-    expenses_sum_knowledge -> expenses_knowledge
+        [label="To know the sum of its expenses | FINANCE DEPARTMENT"]
+    expenses_sum_knowledge -> particular_expenses_knowledge
 
     particular_expenses_knowledge
-        [label="To know its particular expenses"]
-        // [label="responsibility=finance department"]
-    particular_expenses_knowledge -> expenses_sum_knowledge
+        [label="To know its particular expenses | FINANCE DEPARTMENT"]
+    particular_expenses_knowledge -> particular_expenses_storage
 
     customers_surveying
-        [label="To survey customers"]
-        // [label="responsibility=customer service department"]
-    customers_surveying -> service_ratings_storage
+        [label="To survey customers | CUSTOMER SERVICE DEPARTMENT"]
+    customers_surveying -> remaining_money_to_pay_for_the_service_payments_determination
 
     remaining_money_to_pay_for_the_service_payments_determination
-        [label="To determine the remaining money to pay by its clients"]
-        // [label="responsibility=finance department"]
-    remaining_money_to_pay_for_the_service_payments_determination -> customers_surveying
-    remaining_money_to_pay_for_the_service_payments_determination -> remaining_money_to_pay_for_the_service_payments_storage
+        [label="To determine the remaining money to pay by its clients | FINANCE DEPARTMENT"]
+    remaining_money_to_pay_for_the_service_payments_determination -> deliveries
 
     service_advance_determination
-        [label="To determine the service advances"]
-        // [label="responsibility=finance department"]
-    service_advance_determination -> loads
-    service_advance_determination -> service_advance_payments_storage
+        [label="To determine the service advances | FINANCE DEPARTMENT"]
 
     service_price_fixing
-        [label="To fix the service price"]
-        // [label="responsibility=customer service department"]
-    service_price_fixing -> service_price_storage
+        [label="To fix the service price | CUSTOMER SERVICE DEPARTMENT"]
 
     service_price_increase
-        [label="To increase the service price"]
-        // [label="responsibility=finance department"]
-    service_price_increase -> revenue_increase
+        [label="To increase the service price | FINANCE DEPARTMENT"]
+    service_price_increase -> service_price_knowledge
 
     salaries_fixing
-        [label="To fix the salaries"]
-        // [label="responsibility=human resources department"]
-    salaries_fixing -> salaries_storage
+        [label="To fix the salaries | HR DEPARTMENT"]
+    salaries_fixing -> employee_hiring
 
     employee_hiring
-        [label="To hire employees"]
-        // [label="responsibility=human resources department"]
-    employee_hiring -> salaries_fixing
+        [label="To hire employees | HR DEPARTMENT"]
 
     expenses_reduction
-        [label="To reduce its expenses"]
-        // [label="responsibility=finance department"]
-    expenses_reduction -> profitability
+        [label="To reduce its expenses | FINANCE DEPARTMENT"]
+    expenses_reduction -> fuel_consumption_reduction
 
     subgraph information_storage_goals {
         label="Information storage goals."
         cluster=true
 
-        refueling_payments_storage
-            [label="To store its refueling payments"]
-            // [label="responsibility=it department"]
+        subgraph level_3_goals {
+            label="These goals\nare to be implemented\non level 3."
+            cluster=true
+
+            refueling_payments_storage
+                [label="To store its refueling payments | IT DEPARTMENT"]
+
+            service_advance_payments_storage
+                [label="To store the payments of the service advances | IT DEPARTMENT"]
+
+            remaining_money_to_pay_for_the_service_payments_storage
+                [label="To store the payments of the remaining money to pay for the service by its clients | IT DEPARTMENT"]
+
+            shipment_vehicle_storage
+                [label="To store the information what vehicle a shipment was done with | IT DEPARTMENT"]
+
+            delivery_information_storage
+                [label="To store the information that a delivery was done | IT DEPARTMENT"]
+
+            shipment_delivery_relation_storage
+                [label="To store the information what shipment is related to a delivery | IT DEPARTMENT"]
+
+            shipment_information_storage
+                [label="To store the information that a shipment was done | IT DEPARTMENT"]
+
+            parcel_shipments_storage
+                [label="To store the information what shipments a parcel has taken part in | IT DEPARTMENT"]
+        }
 
         particular_expenses_storage
-            [label="To store its particular expenses"]
-            // [label="responsibility=it department"]
+            [label="To store its particular expenses | IT DEPARTMENT"]
 
         clients_payments_storage
-            [label="To store its clients' payments"]
-            // [label="responsibility=it department"]
-
-        service_advance_payments_storage
-            [label="To store the payments of the service advances"]
-            // [label="responsibility=it department"]
-
-        remaining_money_to_pay_for_the_service_payments_storage
-            [label="To store the payments of the remaining money to pay for the service by its clients"]
-            // [label="responsibility=it department"]
+            [label="To store its clients' payments | IT DEPARTMENT"]
 
         service_price_storage
-            [label="To store the service price"]
-            // [label="responsibility=it department"]
-
-        delivery_information_storage
-            [label="To store the information that a delivery was done"]
-            // [label="responsibility=it department"]
-
-        shipment_delivery_relation_storage
-            [label="To store the information what shipment is related to a delivery"]
-            // [label="responsibility=it department"]
-
-        shipment_information_storage
-            [label="To store the information that a shipment was done"]
-            // [label="responsibility=it department"]
+            [label="To store the service price | IT DEPARTMENT"]
 
         vehicles_routes_storage
-            [label="To store the routes of its vehicles"]
-            // [label="responsibility=it department"]
+            [label="To store the routes of its vehicles | IT DEPARTMENT"]
 
         service_ratings_storage
-            [label="To store the service ratings"]
-            // [label="responsibility=it department"]
+            [label="To store the service ratings | IT DEPARTMENT"]
 
         employee_ratings_storage
-            [label="To store the employee ratings"]
-            // [label="responsibility=it department"]
+            [label="To store the employee ratings | IT DEPARTMENT"]
 
         salaries_storage
-            [label="To store the salaries"]
-            // [label="responsibility=it department"]
+            [label="To store the salaries | IT DEPARTMENT"]
 
         parcels_routes_storage
-            [label="To store the routes of parcels"]
-            // [label="responsibility=it department"]
-
-        shipment_vehicle_storage
-            [label="To store the information what vehicle a shipment was done with"]
-            // [label="responsibility=it department"]
-
-        parcel_shipments_storage
-            [label="To store the information what shipments a parcel has taken part in"]
+            [label="To store the routes of parcels | IT DEPARTMENT"]
     }
 
-    remaining_money_to_pay_for_the_service_payments_storage -> clients_payments_storage
-    service_advance_payments_storage -> clients_payments_storage
-    parcel_shipments_storage -> parcels_routes_storage
-    shipments -> parcel_shipments_storage
-    clients_payments_storage -> particular_clients_payments_knowledge
-    refueling_payments_storage -> particular_expenses_storage
-    delivery_information_storage -> parcels_routes_storage
-    delivery_information_storage -> vehicles_routes_storage
-    shipment_delivery_relation_storage -> parcels_routes_storage
-    shipment_delivery_relation_storage -> vehicles_routes_storage
-    parcels_routes_storage -> particular_parcels_routes_knowledge
-    particular_expenses_storage -> particular_expenses_knowledge
-    service_price_storage -> service_price_knowledge
-    vehicles_routes_storage -> vehicles_particular_routes_knowledge
-    service_ratings_storage -> particular_service_ratings_knowledge
-    employee_ratings_storage -> particular_employee_ratings_knowledge
-    salaries_storage -> particular_salaries_knowledge
-    shipment_information_storage -> vehicles_routes_storage
-    shipment_vehicle_storage -> vehicles_routes_storage
-    shipment_information_storage -> parcels_routes_storage
+    salaries_storage -> salaries_fixing
+
+    service_advance_payments_storage -> service_advance_determination
+
+    service_ratings_storage -> customers_surveying
+
+    service_price_storage -> service_price_fixing
+
+    shipment_delivery_relation_storage -> deliveries
+
+    shipment_vehicle_storage -> shipments
+
+    shipment_information_storage -> shipments
+
+    particular_expenses_storage -> refueling_payments_storage
+
+    refueling_payments_storage -> refueling_payments
+
+    employee_ratings_storage -> employees_surveying
+
+    remaining_money_to_pay_for_the_service_payments_storage -> remaining_money_to_pay_for_the_service_payments_determination
+
+    parcels_routes_storage -> {
+        parcel_shipments_storage
+        delivery_information_storage
+        shipment_delivery_relation_storage
+        shipment_information_storage
+    }
+
+    parcel_shipments_storage -> shipments
+
+    delivery_information_storage -> deliveries
+
+    vehicles_routes_storage -> {
+        delivery_information_storage
+        shipment_delivery_relation_storage
+        shipment_information_storage
+        shipment_vehicle_storage
+    }
+
+    clients_payments_storage -> {
+        remaining_money_to_pay_for_the_service_payments_storage
+        service_advance_payments_storage
+    }
 
     service_price_knowledge
-        [label="To know the service price"]
-        // [label="responsibility=customer service department"]
-    service_price_knowledge -> service_price_increase
+        [label="To know the service price | CUSTOMER SERVICE DEPARTMENT"]
+    service_price_knowledge -> service_price_storage
 
     refueling_payments
-        [label="To pay for refueling"]
-        // [label="responsibility=transportation department"]
-    refueling_payments -> refueling_payments_storage
+        [label="To pay for refueling | TRANSPORTATION DEPARTMENT"]
+    refueling_payments -> vehicle_service_stations_bringing
 
     vehicle_service_stations_bringing
-        [label="To bring vehicles to service stations when they lack fuel"]
-        // [label="responsibility=transportation department"]
-    vehicle_service_stations_bringing -> refueling_payments
+        [label="To bring vehicles to service stations when they lack fuel | TRANSPORTATION DEPARTMENT"]
 
     loads
-        [label="To load the cargo specified in orders"]
-        // [label="responsibility=transportation department"]
-    loads -> shipments
+        [label="To load the cargo specified in orders | TRANSPORTATION DEPARTMENT"]
+    loads -> service_advance_determination
 
     shipments
-        [label="To ship loads"]
-        // [label="responsibility=transportation department"]
-    shipments -> deliveries
-    shipments -> shipment_information_storage
-    shipments -> shipment_vehicle_storage
+        [label="To ship loads | TRANSPORTATION DEPARTMENT"]
+    shipments -> loads
 
     deliveries
-        [label="To deliver loads"]
-        // [label="responsibility=transportation department"]
-    deliveries -> remaining_money_to_pay_for_the_service_payments_determination
-    deliveries -> delivery_information_storage
-    deliveries -> shipment_delivery_relation_storage
+        [label="To deliver loads | TRANSPORTATION DEPARTMENT"]
+    deliveries -> shipments
 
     fuel_consumption_reduction
-        [label="To reduce fuel consumption"]
-        // [label="responsibility=transportation department"]
-    fuel_consumption_reduction -> expenses_reduction
+        [label="To reduce fuel consumption | TRANSPORTATION DEPARTMENT"]
+    fuel_consumption_reduction -> vehicles_particular_routes_optimization
 
     particular_parcels_routes_times_knowledge
-        [label="To know the times of particular routes of parcels"]
-        // [label="responsibility=transportation department"]
-    particular_parcels_routes_times_knowledge -> average_parcel_route_time_knowledge
+        [label="To know the times of particular routes of parcels | TRANSPORTATION DEPARTMENT"]
+    particular_parcels_routes_times_knowledge -> particular_parcels_routes_knowledge
 
     average_parcel_route_time_knowledge
-        [label="To know the average time of the routes of parcels"]
-        // [label="responsibility=transportation department"]
-    average_parcel_route_time_knowledge -> average_parcel_route_time_reduction
+        [label="To know the average time of the routes of parcels | TRANSPORTATION DEPARTMENT"]
+    average_parcel_route_time_knowledge -> particular_parcels_routes_times_knowledge
 
     average_parcel_route_time_reduction
-        [label="To reduce the average time of the routes of parcels"]
-        // [label="responsibility=transportation department"]
-    average_parcel_route_time_reduction -> professional_service_delivery
+        [label="To reduce the average time of the routes of parcels | TRANSPORTATION DEPARTMENT"]
+    average_parcel_route_time_reduction -> average_parcel_route_time_knowledge
 
     vehicles_particular_routes_optimization
-        [label="To optimize particular routes of its vehicles"]
-        // [label="responsibility=transportation department"]
-    vehicles_particular_routes_optimization -> fuel_consumption_reduction
+        [label="To optimize particular routes of its vehicles | TRANSPORTATION DEPARTMENT"]
+    vehicles_particular_routes_optimization -> vehicles_particular_routes_knowledge
 
     vehicles_particular_routes_knowledge
-        [label="To know particular routes of its vehicles"]
-        // [label="responsibility=transportation department"]
-    vehicles_particular_routes_knowledge -> vehicles_particular_routes_optimization
+        [label="To know particular routes of its vehicles | TRANSPORTATION DEPARTMENT"]
+    vehicles_particular_routes_knowledge -> vehicles_routes_storage
 
     particular_parcels_routes_knowledge
-        [label="To know particular routes of parcels"]
-    particular_parcels_routes_knowledge -> particular_parcels_routes_times_knowledge
+        [label="To know particular routes of parcels | TRANSPORTATION DEPARTMENT"]
+    particular_parcels_routes_knowledge -> parcels_routes_storage
 
     employees_surveying
-        [label="To survey employees"]
-        // [label="responsibility=human resources department"]
-    employees_surveying -> employee_ratings_storage
+        [label="To survey employees | HR DEPARTMENT"]
 
     average_employee_rating_knowledge
-        [label="To know the average employee rating"]
-        // [label="responsibility=human resources department"]
-    average_employee_rating_knowledge -> average_employee_rating_increase
-    average_employee_rating_knowledge -> good_place_to_work_knowledge
+        [label="To know the average employee rating | HR DEPARTMENT"]
+    average_employee_rating_knowledge -> particular_employee_ratings_knowledge
 
     particular_employee_ratings_knowledge
-        [label="To know particular employee ratings"]
-        // [label="responsibility=human resources department"]
-    particular_employee_ratings_knowledge -> average_employee_rating_knowledge
+        [label="To know particular employee ratings | HR DEPARTMENT"]
+    particular_employee_ratings_knowledge -> employee_ratings_storage
 
     average_employee_rating_increase
-        [label="To increase the average employee rating"]
-        // [label="responsibility=human resources department"]
-    average_employee_rating_increase -> good_place_to_work
+        [label="To increase the average employee rating | HR DEPARTMENT"]
+    average_employee_rating_increase -> {
+        average_employee_rating_knowledge
+        average_salary_increase
+    }
 
     good_place_to_work_knowledge
-        [label="To know if it is a good place to work in"]
-        // [label="responsibility=human resources department"]
-    good_place_to_work_knowledge -> good_place_to_work
+        [label="To know if it is a good place to work in | HR DEPARTMENT"]
+    good_place_to_work_knowledge -> average_employee_rating_knowledge
 
     average_salary_increase
-        [label="To increase the average salary"]
-        // [label="responsibility=human resources department"]
-    average_salary_increase -> average_employee_rating_increase
+        [label="To increase the average salary | HR DEPARTMENT"]
+    average_salary_increase -> particular_salaries_increase
 
     particular_salaries_increase
-        [label="To increase particular salaries"]
-        // [label="responsibility=human resources department"]
-    particular_salaries_increase -> average_salary_increase
+        [label="To increase particular salaries | HR DEPARTMENT"]
+    particular_salaries_increase -> particular_salaries_knowledge
 
     particular_salaries_knowledge
-        [label="To know particular salaries"]
-        // [label="responsibility=human resources department"]
-    particular_salaries_knowledge -> particular_salaries_increase
+        [label="To know particular salaries | HR DEPARTMENT"]
+    particular_salaries_knowledge -> salaries_storage
 
     average_service_rating_knowledge
-        [label="To know the average service rating"]
-        // [label="responsibility=customer service department"]
-    average_service_rating_knowledge -> professional_service_delivery_knowledge
+        [label="To know the average service rating | CUSTOMER SERVICE DEPARTMENT"]
+    average_service_rating_knowledge -> particular_service_ratings_knowledge
 
     particular_service_ratings_knowledge
-        [label="To know particular service ratings"]
-        // [label="responsibility=customer service department"]
-    particular_service_ratings_knowledge -> average_service_rating_knowledge
+        [label="To know particular service ratings | CUSTOMER SERVICE DEPARTMENT"]
+    particular_service_ratings_knowledge -> service_ratings_storage
 
     professional_service_delivery_knowledge
-        [label="To know if it delivers professional service"]
-        // [label="responsibility=customer service department"]
-    professional_service_delivery_knowledge -> professional_service_delivery
+        [label="To know if it delivers professional service | CUSTOMER SERVICE DEPARTMENT"]
+    professional_service_delivery_knowledge -> average_service_rating_knowledge
 }

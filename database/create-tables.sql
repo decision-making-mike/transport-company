@@ -40,3 +40,9 @@ create
         id integer primary key generated always as identity,
         amount integer not null
     );
+
+create
+    table fuel_expenses (
+        id integer primary key generated always as identity,
+        amount integer not null
+    );
