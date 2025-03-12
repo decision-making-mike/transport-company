@@ -85,7 +85,7 @@ To view completed TODOs of this project, see the file [`completed-todos.txt`](co
 
 I inform what reads relevant to this project I am reading or have completed. By "reads" I mean articles, videos, and podcast episodes, among others. I inform what I currently read only if it is a long read. For short to medium-length reads, I inform about them only after completion.
 
-I am currently reading (none).
+Currently I am reading nothing.
 
 To view my completed reads, see the file [`completed-reads.txt`](completed-reads.txt).
 
