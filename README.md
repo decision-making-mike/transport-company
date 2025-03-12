@@ -2,23 +2,29 @@
 
 This repository holds a project of an example transport company. By a "project" I mean a set of standards, overviews, rules, scripts, and the like, that are published here. One could think of the project as a theoretical basis for a transport company, in contrast to an implementation of it, which would be the actual company in the wild.
 
-The main goal of this project is to support the showcase and development of my business analysis and database skills. In other words, it is part of my portfolio.
+## Goals.
 
-The main audience of this project are recruiters. I have decided not to differentiate them by the level of technical expertise. What follows, it is my level of it, rather than that of my audience, that dictates in what style I write blog updates, comments in scripts, et cetera.
+The main goal of this project is to support the showcase and development of my business analysis and database skills. In other words, the project is part of my portfolio.
 
-A note about GitHub issues. I don't know if this README and the project as a whole will be informative enough for you, reader. But I don't specifically encourage you to make issues. I shouldn't expect you to tell me what I need to do in my portfolio, you could be not comfortable with it. Of course, if you'd like to do it, that's fine, I will read the issues and consider their applicability. You can note I haven't disabled them in the repository settings.
+## Audience.
 
-## The structure of the project.
+The main audience of this project are recruiters. I have decided not to differentiate them by the level of technical expertise. What follows, it is my level of this expertise, rather than that of my audience, that dictates in what style I write blog updates, comments in scripts, et cetera.
+
+## Contribution.
+
+I don't know if this README and the project as a whole will be informative enough for you, visitor. But I don't specifically encourage you to make issues. I shouldn't expect you to tell me what I need to do in my portfolio, you could be not comfortable with it. Of course, if you'd like to make an issue, that's fine, I will read it and consider its applicability. You can note I haven't disabled issues in the repository settings.
+
+## Structure of the project.
 
 ![a diagram of the structure of the project, version 3, March 11, 2025](archive/project-structure-version-3-2025-03-11.dot.png)
 
-## The blog of the project.
+## Blog.
 
-The project has a blog, in the file [`blog.md`](blog.md). There, one can read an extensive description of the changes as the project's development continues.
+The project has a blog, in the file [`blog.md`](blog.md). There, one can read an extensive description of the changes as the development of the project continues.
 
-## Usage of the project's scripts.
+## Usage of the scripts in the project.
 
-### Requirements for using the scripts.
+### Requirements.
 
 #### Package requirements.
 
@@ -60,12 +66,14 @@ type -P <command>
 
 #### Other requirements.
 
+The following requirements need to be met before using the scripts.
+
 | Requirement. | Example command to check it.
 | - | -
 | PostgreSQL 17.4 installed. | `psql -U postgres -c 'select version ();'`
 | (An instance of?) PostgreSQL 17.4 running. | `pg_lsclusters`
 
-### Usage of the scripts.
+### Usage.
 
 | Task. | Command. | Directory that the command should be executed in, relative to the project's root directory. | Notes.
 | - | - | - | -
@@ -75,13 +83,13 @@ type -P <command>
 | Getting the results of the queries. | `bash get-queries-results.bash` | `./database`
 | Creating PNG files from DOT graphs across the whole project, and displaying the files. | `bash visualize-graphs.bash` | `./`
 
-## The development of the project.
+## Development of the project.
 
 To view ongoing TODOs of this project, see the file [`ongoing-todos.txt`](ongoing-todos.txt).
 
 To view completed TODOs of this project, see the file [`completed-todos.txt`](completed-todos.txt).
 
-## Reads related to the project.
+## Reads.
 
 I inform what reads relevant to this project I am reading or have completed. By "reads" I mean articles, videos, and podcast episodes, among others. I inform what I currently read only if it is a long read. For short to medium-length reads, I inform about them only after completion.
 
@@ -89,6 +97,6 @@ Currently I am reading nothing.
 
 To view my completed reads, see the file [`completed-reads.txt`](completed-reads.txt).
 
-## Statistics of the project.
+## Statistics.
 
 To view some technology statistics of the project, see the file [`technology-statistics.txt`](technology-statistics.txt).
