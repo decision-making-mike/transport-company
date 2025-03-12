@@ -1,5 +1,26 @@
 # Transport company
 
+## Update 21. `split-labels-contents.awk` changes.
+
+In this update I'm changing the script `split-labels-contents.awk` so that it doesn't move a string with digits to the next line. This completes the TODO 'Updating the script "split-labels-contents.awk" so that it keeps numbers together with the preceding word'.
+
+The old behavior has been effectively meaning having labels with content like
+
+```
+Level
+1.
+```
+
+The new behavior changes the content to
+
+```
+Level 1.
+```
+
+I can't predict all the possible content varieties a label in this project could have, but I hope that this behavior will work in the majority of cases.
+
+One can notice that the implemented behavior, that is, to handle strings with digits, differs from the expected behavior in the aforementioned TODO, that is, to handle numbers. This is because I'd rather use my time for functionality where the ratio "project's improvement level / number of possible bugs" is higher than here.
+
 ## Update 20. `split-labels-contents.awk` changes.
 
 In this update I'm introducing two changes in the script `split-labels-contents.awk`. One, there are allowed now spaces around the equal sign in labels. The reason for the change is, spaces there improve readability. Two, the script produces now strings `\n` instead of actual newline characters. The reason for the change is, `dot` for some, unknown to me reason treats actual newlines as if they don't exist if the shape of the node is `record`. This means in the diagram there are no newlines where they should be, which means, words are concatenated without any separator.

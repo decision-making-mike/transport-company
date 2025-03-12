@@ -34,7 +34,8 @@ function get_longest_element_length( array, n, max )
         n = 1
         for( k = 1 ; k <= length( words ) ; ++ k )
         {
-            if( length( words[ k ] ) > 3 )
+            # Concatenate if a long word or a string with digits.
+            if( length( words[ k ] ) > 3 || words[ k ] ~ /[0-9]/ )
             {
                 for( m = n + 1 ; m <= k ; ++ m )
                 {
