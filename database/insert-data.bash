@@ -19,7 +19,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'orders_generation_and_insertion_time_in_seconds=' \
+    'single_order_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -33,7 +33,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'vehicles_generation_and_insertion_time_in_seconds=' \
+    'single_vehicle_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -47,7 +47,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'parameters_generation_and_insertion_time_in_seconds=' \
+    'single_parameter_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -61,7 +61,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'parcels_generation_and_insertion_time_in_seconds=' \
+    'single_parcel_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -75,7 +75,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'shipments_generation_and_insertion_time_in_seconds=' \
+    'single_shipment_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -89,7 +89,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'deliveries_generation_and_insertion_time_in_seconds=' \
+    'single_delivery_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -103,7 +103,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'made_payments_generation_and_insertion_time_in_seconds=' \
+    'single_made_payment_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
@@ -117,7 +117,7 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'fuel_expenses_generation_and_insertion_time_in_seconds=' \
+    'single_fuel_expense_generation_and_insertion_average_time_in_seconds=' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
         -f '%E' \
