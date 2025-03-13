@@ -1,10 +1,12 @@
 #!/bin/bash
 
 set \
-    -e \
-    -o 'pipefail'
+-e \
+-o 'pipefail'
 
 log="$1"
+
+port=5432
 
 if [[ -z "$log" ]]
 then
@@ -25,12 +27,13 @@ then
 fi
 
 for (( k = 0 ; k < 10 ; ++k ))
-do bash \
+do
+    bash \
     "$data_insertion_file" \
-    5432 \
+    "$port" \
     "$log"
 done
 
 gawk \
-    -f "$benchmarking_results_processing_file" \
-    "$log"
+-f "$benchmarking_results_processing_file" \
+"$log"
