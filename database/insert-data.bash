@@ -19,111 +19,175 @@ fi
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_order_generation_and_insertion_average_time_in_seconds=' \
+    'orders ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-orders.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from orders;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_vehicle_generation_and_insertion_average_time_in_seconds=' \
+    'vehicles ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-vehicles.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from vehicles;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_parameter_generation_and_insertion_average_time_in_seconds=' \
+    'parameters ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-parameters.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from parameters;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_parcel_generation_and_insertion_average_time_in_seconds=' \
+    'parcels ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-parcels.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from parcels;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_shipment_generation_and_insertion_average_time_in_seconds=' \
+    'shipments ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-shipments.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from shipments;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_delivery_generation_and_insertion_average_time_in_seconds=' \
+    'deliveries ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-deliveries.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from deliveries;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_made_payment_generation_and_insertion_average_time_in_seconds=' \
+    'made_payments ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-made-payments.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from made_payments;' \
+                        || exit 1
 
 >> "$data_insertion_times_log_file" \
     echo \
     -n \
-    'single_fuel_expense_generation_and_insertion_average_time_in_seconds=' \
+    'fuel_expenses ' \
         && /bin/time \
         -ao "$data_insertion_times_log_file" \
-        -f '%E' \
+        --format '%E' \
             psql \
             -U 'postgres' \
             -p "$port" \
             'transport-company' \
             -f 'data-generation-insertion/insert-fuel-expenses.sql' \
-                || exit 1
+                && >> "$data_insertion_times_log_file" \
+                    psql \
+                    --no-align \
+                    --quiet \
+                    --tuples-only \
+                    --username postgres \
+                    'transport-company' \
+                    --command 'select count (*) from fuel_expenses;' \
+                        || exit 1

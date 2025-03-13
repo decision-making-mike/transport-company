@@ -1,4 +1,89 @@
-# Transport company
+# Blog.
+
+## Update 22. Changes in benchmarking. Benchmarked times before optimization. Some other changes.
+
+### Changes in benchmarking.
+
+#### Change one.
+
+I'm now passing the numbers of rows inserted along with particular measured times. Before, I were just, let's say, "guessing" or "assuming" those numbers in the script `database/process-benchmarking-results.awk`.
+
+In the case of the table `parcels`, this change should make benchmarking results slightly more reliable. Currently, it's the only table that has a random number of rows generated for. Before the change, as I said, I was "guessing" the number of rows for this table. I assumed it as the average of minimum and maximum number of rows that could be inserted. Such a guess makes sense, but only to a certain degree. Nearly all the time it should happen that the actual total number of rows generated was smaller or bigger than that. Note that we don't know if the difference was to be neglectable or not. Now, the fact that we are taking an average of the execution times should lessen the impact this difference could have, but still there was some uncertainty. Now, after the change, we know exactly how many rows have been generated when we are calculating the average.
+
+In the case of all the tables, this change reduces the dependence of the code processing benchmarking results on the code generating the data. Before, if I changed the number of rows generated for a table, I would need to change that number in two places, first in a file in the directory `database/data-generation-insertion`, and second in the file `database/process-benchmarking-results.awk`. Now I don't need to change the AWK script.
+
+#### Change two.
+
+I've simplified the interface between data insertion and benchmarking. Two aspects here. Aspect one, I've reduced the length of time identifiers. Aspect two, now time identifiers are simply table names, while before they were more custom.
+
+So, for example, instead of the old longer and more custom
+
+```
+single_order_generation_and_insertion_average_time_in_seconds
+```
+
+one will now see the shorter and less custom
+
+```
+orders
+```
+
+This change makes not so much of an impact in itself, but it should reduce the overall effort to comprehend the code.
+
+#### Change three.
+
+Now the script `database/process-benchmarking-results.awk` produces a set of nice Markdown tables. The tables can just be copied and embedded without any changes in this blog, as you can see below. Before the change I was spending too much time and energy on formatting the benchmarking results.
+
+### Benchmarked times before optimization.
+
+The averages were calculated from 20 measurements. A "measurement" means a single execution of the script `database/reset-database.bash`. All times are in seconds.
+
+#### Total times.
+
+| Table. | Total time.
+| - | -
+| `parameters` | 3.900000
+| `fuel_expenses` | 12.740000
+| `deliveries` | 41.210000
+| `orders` | 4.300000
+| `made_payments` | 285.730000
+| `shipments` | 81.380000
+| `parcels` | 52.310000
+| `vehicles` | 12.030000
+
+#### Measurement averages.
+
+| Table. | Number of measurements. | Average time per 1 measurement.
+| - | - | -
+| `parameters` | 20 | 0.195000
+| `fuel_expenses` | 20 | 0.637000
+| `deliveries` | 20 | 2.060500
+| `orders` | 20 | 0.215000
+| `made_payments` | 20 | 14.286500
+| `shipments` | 20 | 4.069000
+| `parcels` | 20 | 2.615500
+| `vehicles` | 20 | 0.601500
+
+#### Row averages.
+
+| Table. | Total number of inserted rows. | Average time per 1 row.
+| - | - | -
+| `parameters` | 40 | 0.097500
+| `fuel_expenses` | 200000 | 0.000064
+| `deliveries` | 572908 | 0.000072
+| `orders` | 20000 | 0.000215
+| `made_payments` | 40000 | 0.007143
+| `shipments` | 572908 | 0.000142
+| `parcels` | 572908 | 0.000091
+| `vehicles` | 200000 | 0.000060
+
+### Some other changes.
+
+One, I've changed the title of the blog to "blog".
+
+Two, in the script `database/process-benchmarking-results.awk` I've started a convention of splitting AWK function calls with two or more arguments into separate lines, for readability. This is equivalent to my convention of splitting into separate lines lines in Bash having a command that takes two or more arguments.
+
+Three, I've make the script `database/insert-data.bash` closer following my desire to put long instead of short option names in scripts, by changing `-f` to `--format`.
 
 ## Update 21. `split-labels-contents.awk` changes.
 
