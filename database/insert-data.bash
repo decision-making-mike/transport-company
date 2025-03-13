@@ -1,8 +1,8 @@
 #!/bin/bash
 
 set \
-    -e \
-    -o 'pipefail'
+-e \
+-o 'pipefail'
 
 port="$1"
 
