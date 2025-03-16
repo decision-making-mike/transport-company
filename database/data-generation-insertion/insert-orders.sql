@@ -1,16 +1,22 @@
 do
 $$
     declare
-        count integer := 1000;
-        max_total_cargo_weight_in_kg integer := 1000;
-        total_cargo_weight_in_kg integer;
-        k integer;
+        number_of_rows integer
+            := 1000;
+        max_total_cargo_weight_in_kg integer
+            := 1000;
     begin
-        for k in 1..count loop
-            total_cargo_weight_in_kg := random (1, max_total_cargo_weight_in_kg);
-            insert
-                into orders (total_cargo_weight_in_kg)
-                values (total_cargo_weight_in_kg);
-        end loop;
+        insert
+            into orders (total_cargo_weight_in_kg)
+            select
+                random (
+                    1,
+                    max_total_cargo_weight_in_kg
+                )
+            from
+                generate_series (
+                    1,
+                    number_of_rows
+                );
     end;
 $$;

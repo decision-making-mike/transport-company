@@ -79,6 +79,7 @@ The following requirements need to be met before using the scripts.
 | - | - | - | -
 | Creating the database, removing the old one if it exists, generating data, and inserting them. | `bash reset-database.bash [<port>] [<times log file>]` | `./database` | `<times log file>` means a file that is to be used for logging the times of data generation and insertion.
 | Benchmarking data insertion and generation. | `bash benchmark-data-insertion.bash <times log file>` | `./database` | `<times log file>` means as above.
+| Comparing benchmarking results before and after code optimization. | `gawk -f process-benchmarking-results.awk <times log file with times before the optimization> <times log file with times after the optimization>` | `./database` | `<times log file>` means as above.
 | Verifying that the data has been generated and inserted correctly. | `bash show-sample-data.bash` | `./database`
 | Getting the results of the queries. | `bash get-queries-results.bash` | `./database`
 | Creating PNG files from DOT graphs across the whole project, and displaying the files. | `bash visualize-graphs.bash` | `./`

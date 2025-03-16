@@ -1,13 +1,11 @@
 do
 $$
-    declare
-        count integer := 10000;
-        k integer;
+    declare number_of_rows integer := 10000;
     begin
-        for k in 1..count loop
-            insert
-                into vehicles
-                default values;
-        end loop;
+        -- Note empty "select" list. We want only the default value of the column "id" to be inserted. Details at https://www.postgresql.org/docs/current/sql-select.html.
+        insert
+            into vehicles
+            select
+            from generate_series (1, number_of_rows);
     end;
 $$;

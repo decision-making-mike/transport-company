@@ -8,11 +8,11 @@
         time_pieces , \
         ":" \
     )
-    if ( length( time_pieces ) == 3 ) {
+    if( length( time_pieces ) == 3 ){
         hours = time_pieces[ 1 ]
         minutes = time_pieces[ 2 ]
         seconds = time_pieces[ 3 ]
-    } else {
+    }else{
         hours = 0
         minutes = time_pieces[ 1 ]
         seconds = time_pieces[ 2 ]
@@ -20,47 +20,59 @@
 
     total_seconds = seconds + minutes * 60 + hours * 3600
 
-    total_times[ table_name ] += total_seconds
-    ++ measurement_counts[ table_name ]
+    if( FILENAME == ARGV[ 1 ] ){
+        total_times_before_optimization[ table_name ] += total_seconds
+        ++ numbers_of_measurements_before_optimization[ table_name ]
+        number_of_measurements_before_optimization \
+            = numbers_of_measurements_before_optimization[ table_name ]
+        total_row_counts_before_optimization[ table_name ] += next_line
+    }else{
+        total_times_after_optimization[ table_name ] += total_seconds
+        ++ numbers_of_measurements_after_optimization[ table_name ]
+        number_of_measurements_after_optimization \
+            = numbers_of_measurements_after_optimization[ table_name ]
+        total_row_counts_after_optimization[ table_name ] += next_line
+    }
 
-    total_row_counts[ table_name ] += next_line
     next
 }
-END {
-    printf( "Total times.\n\n" )
-    printf( "| Table. | Total time.\n" )
-    printf( "| - | -\n" )
-    for ( table_name in total_times ) {
-        printf( \
-            "| `%s` | %f\n" , \
-            table_name , \
-            total_times[ table_name ] \
-        )
+
+END{
+    if( length( total_times_after_optimization ) == 0 ){
+        printf( "Number of measurements = %d\n" , number_of_measurements_before_optimization )
+        printf( "\n" )
+        printf( "| Table. | Average time per 1 row (seconds).\n" )
+        printf( "| - | -\n" )
+    }else{
+        printf( "Number of measurements before optimization = %d\n" , number_of_measurements_before_optimization )
+        printf( "Number of measurements after optimization = %d\n" , number_of_measurements_after_optimization )
+        printf( "\n" )
+        printf( "| Table. | Average time per 1 row before optimization (seconds). | Average time per 1 row after optimization (seconds). | Change percent.\n" )
+        printf( "| - | - | - | -\n" )
     }
-    printf( "\n" )
-    printf( "Measurement averages\n\n" )
-    printf( "| Table. | Number of measurements. | Average time per 1 measurement.\n" )
-    printf( "| - | - | -\n" )
-    for ( table_name in total_times ) {
-        average = total_times[ table_name ] / measurement_counts[ table_name ]
-        printf( \
-            "| `%s` | %d | %f\n" , \
-            table_name , \
-            measurement_counts[ table_name ] , \
-            average \
-        )
-    }
-    printf( "\n" )
-    printf( "Row averages.\n\n" )
-    printf( "| Table. | Total number of inserted rows. | Average time per 1 row.\n" )
-    printf( "| - | - | -\n" )
-    for ( table_name in total_times ) {
-        normalized_average = total_times[ table_name ] / total_row_counts[ table_name ]
-        printf( \
-            "| `%s` | %d | %f\n" , \
-            table_name , \
-            total_row_counts[ table_name ] , \
-            normalized_average \
-        )
+    for( table_name in total_times_before_optimization ){
+        average_before_optimization \
+            = total_times_before_optimization[ table_name ] \
+            / total_row_counts_before_optimization[ table_name ]
+        if( length( total_times_after_optimization ) == 0 ){
+            printf( \
+                "| `%s` | %f\n" , \
+                table_name , \
+                average_before_optimization \
+            )
+        }else{
+            average_after_optimization \
+                = total_times_after_optimization[ table_name ] \
+                / total_row_counts_after_optimization[ table_name ]
+            printf( \
+                "| `%s` | %f | %f | %.0f\n" , \
+                table_name , \
+                average_before_optimization , \
+                average_after_optimization , \
+                ( average_before_optimization - average_after_optimization ) \
+                    / average_before_optimization \
+                    * 100 \
+            )
+        }
     }
 }

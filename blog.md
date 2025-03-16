@@ -1,5 +1,56 @@
 # Blog.
 
+## Update 23. Code optimization. Changes in the script `database/process-benchmarking-results.awk`.
+
+### Code optimization.
+
+I'm introducing an optimization of the code generating and inserting data. By "optimization" I mean time optimization. While optimizing, I also made some other changes to that code so that it just "look better","make more sense". For the details, refer to the content of the commit.
+
+What's worth mentioning here, to some extent it is accidental that my changes have indeed optimized the time. I don't really know yet how to write efficient code in SQL or PostgreSQL. Like, for instance, it seemed to me common sense to replace `insert`s (SQL thing) in loops (PostgreSQL thing) with the `insert`s alone, and I've done so. Comparison of the times is below.
+
+The number of measurements before optimization is 20.
+
+The number of measurements after optimization is 10.
+
+| Table. | Average time per 1 row before optimization (seconds). | Average time per 1 row after optimization (seconds). | Change percent.
+| - | - | - | -
+| `parameters` | 0.097500 | 0.103500 | -6
+| `orders` | 0.000215 | 0.000177 | 18
+| `deliveries` | 0.000072 | 0.000069 | 4
+| `fuel_expenses` | 0.000064 | 0.000034 | 46
+| `made_payments` | 0.007143 | 0.000188 | 97
+| `shipments` | 0.000142 | 0.000113 | 20
+| `vehicles` | 0.000060 | 0.000036 | 41
+| `parcels` | 0.000091 | 0.000067 | 27
+
+To conclude, times for nearly all the tables are lower. I see two results standing out.
+
+First, the increase for the table `parameters`. On the one hand it looks odd to me as I haven't changed the logic of the code for generating and inserting parameters. On the other hand I shouldn't expect my gut to make accurate predictions in this area. One, I don't know yet what exactly influences the execution time of code in PostgreSQL, other than my code itself. Two, there are only 2 parameters inserted, and this should even amplify the dependency of the time of their generation and insertion on things beyond my code.
+
+Second, the decrease for the table `made_payments`. No idea why it's so high.
+
+As one can notice, I'm not presenting either total times or measurement averages like I've done in the previous update for the times before optimization. Total times cannot be compared as the number of measurements is different before and after optimization. To calculate measurement averages makes little sense on its own, given the number of rows in tables vary from measurement to measurement.
+
+By the way, I need to make something clear. Reading the previous update, one might have understood that it's only the table `parcels` that has a variable number of rows between measurements. This of course is not the case. The tables `shipments` and `deliveries` also have variable numbers of rows between measurements, as for every parcel there is generated one shipment and one delivery.
+
+Looking beyond, we might consider how the average total time of generating and inserting the data would look like if for every table there were generated 1 million rows. Results in the table below. I've excluded the table `parameters`, as the number of parameters cannot be changed without influencing the business requirements for the database.
+
+| Table. | Average time per 1 row (seconds). | Average total time of generating and inserting 1 million rows.
+| - | - | -
+| `orders` | 0.000177 | 177 s = 2 min 57 s
+| `deliveries` | 0.000069 | 69 s = 1 min 9 s
+| `fuel_expenses` | 0.000034 | 34 s
+| `made_payments` | 0.000188 | 188 s = 3 min 8 s
+| `shipments` | 0.000113 | 113 s = 1 min 53 s
+| `vehicles` | 0.000036 | 36 s
+| `parcels` | 0.000067 | 67 s = 1 min 7 s
+
+11 min 24 s in total. Even though I don't plan to make every table have 1 million rows from tomorrow on, that is still too much! There is room for optimization. But, we will see if it wouldn't be more beneficial for me just to have less rows instead of spending days on optimization.
+
+### Changes in the script `database/process-benchmarking-results.awk`.
+
+Now the script returns only the average times per 1 row. Also, it takes now 2 arguments, a log file with the benchmarking results before optimization, and a log file with the benchmarking results after optimization, in this order. It can handle both one and two arguments, to be compatible with the old behavior. For details on how to use it, refer to the README, section "[usage](README.md?tab=readme-ov-file#usage)", and optionally to the code.
+
 ## Update 22. Changes in benchmarking. Benchmarked times before optimization. Some other changes.
 
 ### Changes in benchmarking.
