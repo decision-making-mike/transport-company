@@ -2,7 +2,7 @@
 
 ## Update 24. Benchmarking.
 
-| Table. | Average time per 1 row for 1000 rows generated (10 measurements). | Average time per 1 row for 10 000 rows generated (10 measurements).
+| Table. | Average time per 1 row for 1000 rows generated (10 measurements, in seconds). | Average time per 1 row for 10 000 rows generated (10 measurements, in seconds).
 | - | - | -
 | `orders` | 0.000177 | 0.000040
 
