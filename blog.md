@@ -1,5 +1,13 @@
 # Blog.
 
+## Update 24. Benchmarking.
+
+| Table. | Average time per 1 row for 1000 rows generated (10 measurements). | Average time per 1 row for 10 000 rows generated (10 measurements).
+| - | - | -
+| `orders` | 0.000177 | 0.000040
+
+I don't expect the difference to be so big. Why is it? Number of measurements' being too low, bug, my wrong interpretation of the statistic?
+
 ## Update 23. Code optimization. Changes in the script `database/process-benchmarking-results.awk`.
 
 ### Code optimization.
