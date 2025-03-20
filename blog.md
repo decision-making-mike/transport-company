@@ -1,5 +1,11 @@
 # Blog.
 
+## Update 25. Refactoring.
+
+In this update I'm changing the names of variables so that they contain full names of the SI units, and not their symbols. Moreover, I'd like it to become my habit to use full names in variable names. The thing is, variable names are to be always in lowercase, but not all SI units are in lowercase. This also applies to units other than from SI. Strictly speaking, I don't know whether there are units, in SI or any other system, or cross-system, that differ only in their case. But I think it's worth to avoid confusion anyway, especially given that a variable name forms a context where precision matters.
+
+I'm also improving code formatting, and improving the name of one variable in the script `database/data-generation-insertion/insert-orders.sql`.
+
 ## Update 24. Benchmarking.
 
 | Table. | Average time per 1 row for 1000 rows generated (10 measurements, in seconds). | Average time per 1 row for 10 000 rows generated (10 measurements, in seconds).
