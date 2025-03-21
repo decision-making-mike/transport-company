@@ -48,7 +48,7 @@ apt list --installed <package>
 
 The following commands need to be in `PATH` before using the scripts. In Bash, one can check if a command is in `PATH` with
 
-```bash
+```
 type -P <command>
 ```
 
