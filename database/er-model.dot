@@ -11,7 +11,7 @@ digraph
         [ label = "{ORDERS|ID\lTotal cargo weight in kg\l}" ]
 
     vehicles
-        [ label = "{VEHICLES|ID\l}" ]
+        [ label = "{VEHICLES|ID\lMax cargo weight in kg}" ]
 
     made_payments
         [ label = "{MADE PAYMENTS|ID\lAmount\l}" ]

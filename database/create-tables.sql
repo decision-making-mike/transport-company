@@ -6,7 +6,8 @@ create
 
 create
     table vehicles (
-        id integer primary key generated always as identity
+        id integer primary key generated always as identity,
+        max_cargo_weight_in_kilograms integer not null
     );
 
 create
