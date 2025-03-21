@@ -20,7 +20,7 @@ if [[ ! -f "$tables_creation_file" || ! -f "$data_insertion_file" ]]
 then
     >&2 \
     echo \
-    "File missing error"
+    'File missing error'
 
     exit \
     1
@@ -35,7 +35,7 @@ psql \
     || {
         >&2 \
         echo \
-        "Error when dropping or creating the database, exiting"
+        'Error when dropping or creating the database, exiting'
 
         exit \
         1
@@ -49,7 +49,7 @@ psql \
     || {
         >&2 \
         echo \
-        "Error when creating tables, exiting"
+        'Error when creating tables, exiting'
 
         exit \
         1
@@ -62,7 +62,7 @@ bash \
     || {
         >&2 \
         echo \
-        "Error when inserting data, exiting"
+        'Error when inserting data, exiting'
 
         exit \
         1
