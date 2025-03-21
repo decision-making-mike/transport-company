@@ -1,5 +1,4 @@
-do
-$$
+do $$
     declare
         max_parcel_weight_in_kilograms integer
             := (

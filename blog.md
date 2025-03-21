@@ -1,5 +1,25 @@
 # Blog.
 
+## Update 26. Company realness considerations and adjustments.
+
+### Considerations.
+
+There are two things determining the realness of the company.
+
+One, the business rules. They are represented by relationships between goals, entities, and tables, both within particular levels of the project, and cross-level.
+
+Two, the parameters of the company. Currently they are all being provided in the SQL scripts. I distinguish two types of them, setup parameters and operation parameters. Setup parameters are like an interface, a bridge between the project and the company. They have the same function in the project as external factors like the passage of time, or business environment, would have in an implementation of the company. They are being provided in the section `declare` of a [PL/pgSQL block](https://www.postgresql.org/docs/current/plpgsql-structure.html). Operation parameters have the same function in the project as they would have in an implementation of the company, which is determination of the direction of the company's operation. In an implementation, they would be provided by the management. They are kept in the table `parameters`.
+
+I don't plan to make the company a totally concrete one, rooted in a reality of a concrete country, even if this country be fictional. I'd rather have the company generic to some extent. In this regard I'm evaluating whether the project could be tailored to be a "company generator". It means it should allow to easily change the company parameters, both the setup and operation ones, preferably while executing `database/reset-database.bash`. This would be unlike the current situation, when parameters can only be changed in the SQL scripts.
+
+### Adjustments.
+
+One, I've adjusted some parameters. As I notice, it has sped up execution of the script `database/reset-database.bash`.
+
+Two, I've provided realness considerations in comments.
+
+Three, I've changed how fuel expenses are generated.
+
 ## Update 25. Refactoring.
 
 In this update I'm changing the names of variables so that they contain full names of the SI units, and not their symbols. Moreover, I'd like it to become my habit to use full names in variable names. The thing is, variable names are to be always in lowercase, but not all SI units are in lowercase. This also applies to units other than from SI. Strictly speaking, I don't know whether there are units, in SI or any other system, or cross-system, that differ only in their case. But I think it's worth to avoid confusion anyway, especially given that a variable name forms a context where precision matters.
