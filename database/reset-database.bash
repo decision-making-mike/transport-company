@@ -18,8 +18,8 @@ data_insertion_file='insert-data.bash'
 
 if [[ ! -f "$tables_creation_file" || ! -f "$data_insertion_file" ]]
 then
+    >&2 \
     echo \
-    1>&2 \
     "File missing error"
 
     exit \
@@ -33,8 +33,8 @@ psql \
 -c 'drop database "transport-company";' \
 -c 'create database "transport-company";' \
     || {
+        >&2 \
         echo \
-        1>&2 \
         "Error when dropping or creating the database, exiting"
 
         exit \
@@ -47,8 +47,8 @@ psql \
 'transport-company' \
 -f "$tables_creation_file" \
     || {
+        >&2 \
         echo \
-        1>&2 \
         "Error when creating tables, exiting"
 
         exit \
@@ -60,8 +60,8 @@ bash \
 "$port" \
 "$data_insertion_times_log_file" \
     || {
+        >&2 \
         echo \
-        1>&2 \
         "Error when inserting data, exiting"
 
         exit \
