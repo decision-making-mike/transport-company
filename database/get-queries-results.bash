@@ -10,7 +10,7 @@ if [[ ! -f "$get_queries_results_sql_file" ]]
 then
     >&2 \
     echo \
-    "File missing error"
+    'File missing error'
 
     exit \
     1
@@ -23,7 +23,7 @@ psql \
     || {
         >&2 \
         echo \
-        "Error when dropping or creating the database, exiting"
+        'Error when dropping or creating the database, exiting'
 
         exit \
         1
