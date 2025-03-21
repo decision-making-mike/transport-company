@@ -4,6 +4,11 @@ find \
 -name '*.dot' \
 -print0 \
     | \
+        grep \
+        --null-data \
+        --invert-match \
+        '/archive/' \
+    | \
         while
             read \
             -d '' \
