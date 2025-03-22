@@ -49,27 +49,28 @@ a3=(
     'select count (*) from fuel_expenses;'
 )
 
-for (( k = 0 ; k < "${#a1}" ; ++k ))
+for (( k = 0 ; k < "${#a1[@]}" ; ++k ))
 do
     >> "$data_insertion_times_log_file" \
         echo \
         -n \
         "${a1[k]}" \
-            && /bin/time \
-            -ao "$data_insertion_times_log_file" \
-            --format '%E' \
-                psql \
-                -U 'postgres' \
-                -p "$port" \
-                'transport-company' \
-                -f "${a2[k]}" \
-                    && >> "$data_insertion_times_log_file" \
-                        psql \
-                        --no-align \
-                        --quiet \
-                        --tuples-only \
-                        --username postgres \
-                        'transport-company' \
-                        --command "${a3[k]}" \
-                            || exit 1
+            && echo "Running ${a2[k]}" \
+                && /bin/time \
+                -ao "$data_insertion_times_log_file" \
+                --format '%E' \
+                    psql \
+                    -U 'postgres' \
+                    -p "$port" \
+                    'transport-company' \
+                    -f "${a2[k]}" \
+                        && >> "$data_insertion_times_log_file" \
+                            psql \
+                            --no-align \
+                            --quiet \
+                            --tuples-only \
+                            --username postgres \
+                            'transport-company' \
+                            --command "${a3[k]}" \
+                                || exit 1
 done
