@@ -15,7 +15,10 @@ do $$
                         generate_series (
                             1,
                             cast (
-                                ceiling ( total_cargo_weight_in_kilograms / max_parcel_weight_in_kilograms )
+                                ceiling (
+                                    total_cargo_weight_in_kilograms
+                                    / cast (max_parcel_weight_in_kilograms as double precision)
+                                )
                                 as integer
                             )
                         );
