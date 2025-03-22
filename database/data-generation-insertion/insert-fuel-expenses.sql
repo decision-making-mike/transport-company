@@ -13,8 +13,8 @@ do $$
             into fuel_expenses (amount)
             select
                 random (
-                    min_amount,
-                    max_amount
+                    min_fuel_expense_amount,
+                    max_fuel_expense_amount
                 )
                 from
                     generate_series (
